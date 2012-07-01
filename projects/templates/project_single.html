@@ -1,0 +1,179 @@
+{% extends "base_tabs.html" %}
+{% block breadcrumbs %}<a href="{% url projects.views.index %}">Projects</a> » {{ project.title }}{% endblock %}
+{% block title %}{{ project.title }}{% endblock %}
+{% block subtitle %}{{ project.description }}{% endblock %}
+{% block content %}
+	<ul>
+		<li><a href="#overview">Overview</a></li>
+		<li><a href="#tasks">Tasks</a></li>
+		<li><a href="#memos">Memos</a></li>
+		<li><a href="#documents">Documents</a></li>
+	</ul>
+	<div id="overview">
+		<form class="edit_form" method="POST" action="#overview">
+			{% csrf_token %}
+			<table>
+				<thead>
+					<tr>
+						<th id="timeleft" colspan="2">
+							<div class="graph"></div>
+							{% if project.time_left_days >= 0 %}
+								<p><span class="daysleft">{{ project.time_left_days|default:"&#8734;" }}</span> days left</p>
+							{% else %}
+								<p><span class="daysoverdue">{{ project.time_overdue_days|default:"&#8734;" }}</span> days overdue</p>
+							{% endif %}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for field in edit_form %}
+						<tr>
+							<td>{{ field.label_tag }}</td>
+							<td class="field">{{ field }} {{ field.errors }}</td>
+						</tr>
+					{% endfor %}					
+					<tr>
+						<td>Creation date</td>
+						<td>{{ project.creation_date }}</td>
+					</tr>
+					<tr>
+						<td>Incomplete tasks</td>
+						<td>{{ tasks.count }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="fieldwrap">
+				<input name="edit_form" class="submit" type="submit" value="Save changes"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+	
+	
+	<div id="tasks">
+		<h2>Tasks</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Deadline</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for task in tasks %}
+					<tr class="status-{{ task.status }}">
+						<td>{{ task.title }}</td>
+						<td>{{ task.content|linebreaksbr }}</td>
+						<td>{{ task.deadline }}</td>
+						<td class="status">
+							<a title="High priority" class="important {% if task.status = task.IMPORTANT %} current{% endif %}" href="{% url projects.views.task_status task.id task.IMPORTANT %}">&nbsp;</a>
+							<a title="Active" class="active {% if task.status = task.ACTIVE %} current{% endif %}" href="{% url projects.views.task_status task.id task.ACTIVE %}">&nbsp;</a>
+							<a title="On hold" class="hold {% if task.status = task.HOLD %} current{% endif %}" href="{% url projects.views.task_status task.id task.HOLD %}">&nbsp;</a>
+							<a title="Completed" class="completed {% if task.status = task.COMPLETED %} current{% endif %}" href="{% url projects.views.task_status task.id task.COMPLETED %}">&nbsp;</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<form method="POST" action="#tasks">
+			<h3>Create a new task</h3>
+			{% csrf_token %}
+			{% for field in task_form %}
+				<div class="fieldwrap">
+					{{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
+			<div class="fieldwrap">
+				<input name="task_form" class="submit" type="submit" value="Save task"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+	
+	
+	<div id="memos">
+		<h2>Memos</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Message</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for memo in memos %}
+					<tr>
+						<td>{{ memo.title }}</td>
+						<td>{{ memo.content|linebreaksbr }}</td>
+						<td>{{ memo.date.date }}</td>
+						<td><a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<form method="POST" action="#memos">
+			<h3>Write a memo</h3>
+			{% csrf_token %}
+			{% for field in memo_form %}
+				<div class="fieldwrap">
+					{{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
+			<div class="fieldwrap">
+				<input name="memo_form" class="submit" type="submit" value="Save memo"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>	
+	</div>
+	
+	
+	<div id="documents">
+		<h2>Documents</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% load comments %}
+				{% for document in documents %}
+					<tr>
+						<td><a href="{% url projects.views.document_single document.id %}">{{ document.title }}</a></td>
+						<td>{{ document.description }}</td>
+						<td>{{ document.creation_date.date }}</td>
+						<td>
+							<a title="Download this document" class="button download" href="/{{ document.file.name }}">&nbsp;</a>
+							<a title="Share this document" class="button share" href="{% url projects.views.document_single document.id %}#share">&nbsp;</a>
+							<a title="See comments for this document" class="button comments" href="{% url projects.views.document_single document.id %}#comments">{% get_comment_count for document as comment_count %}{{comment_count}}</a>
+							<a title="Delete this document" class="button delete" href="{% url projects.views.document_delete document.id %}#documents">&nbsp;</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<form method="POST" enctype="multipart/form-data" action="#documents">
+			<h3>Upload a new document</h3>
+			{% csrf_token %}
+			{% for field in document_form %}
+				<div class="fieldwrap">
+					{{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
+			<div class="fieldwrap">
+				<input name="document_form" class="submit" type="submit" value="Upload document"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>	
+	</div>
+{% endblock %}

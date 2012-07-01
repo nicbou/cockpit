@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block subtitle %}Login to access your projects{% endblock %}
+{% block content %}
+	<form method="post" action="/login/">
+		{% csrf_token %}
+		{% if form.errors %}
+			<p>Your username and password didn't match. Please try again.</p>
+		{% endif %}
+		<div class="fieldwrap">
+			{{ form.username.label_tag }}{{ form.username }}
+		</div>
+		<div class="fieldwrap">
+			{{ form.password.label_tag }}{{ form.password }}
+		</div>
+		<div class="fieldwrap">
+			<input class="submit" type="submit" value="Sign in" />
+			<input type="hidden" name="next" value="{{ next }}" />
+		</div>
+		<div class="floatfix"></div>
+	</form>
+	<a href="/login/reset">Forgot your password?</a>
+{% endblock %}
