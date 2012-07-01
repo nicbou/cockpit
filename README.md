@@ -15,3 +15,10 @@ A project management tool written in Python using the Django framework.
 
 * Sleek, consistent user interface. Anyone should be able to pick it up easily.
 * Focus on flexibility. It is simple enough to fit anyone's workflow.
+
+**Demo**
+
+http://home.nicolasbouliane.com:82/
+
+Username: test
+Password: test
