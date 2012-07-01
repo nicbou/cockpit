@@ -6,6 +6,7 @@
 	<ul>
 		<li><a href="#projects">Projects</a></li>
 		<li><a href="#tasks">Priority tasks</a></li>
+		<li><a href="#memos">Latest memos</a></li>
 		<li><a href="#documents">Latest documents</a></li>
 	</ul>
 	<div id="projects">
@@ -76,6 +77,29 @@
 				{% endfor %}
 			</tbody>
 		</table>
+	</div>
+	<div id="memos">
+		<h2>Latest memos</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Message</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for memo in memos %}
+					<tr>
+						<td>{{ memo.title }}</td>
+						<td>{{ memo.content|linebreaksbr }}</td>
+						<td>{{ memo.date_modified.date }}</td>
+						<td><a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>	
 	</div>
 	<div id="documents">
 		<h2>Latest documents</h2>

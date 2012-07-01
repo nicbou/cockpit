@@ -26,12 +26,14 @@ def index (request):
 			return redirect('project_single', new_project.id)
 	projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
 	tasks = Task.objects.filter(project__in = projects).exclude(status = 0)[:30]
+	memos = Memo.objects.filter(project__in = projects)[:30]
 	documents = Document.objects.filter(project__in = projects)[:30]
 	
 	recent = sorted(chain(tasks,documents), key=operator.attrgetter('creation_date'), reverse=True)[:10]
 	return render(request,"index.html",{
 		'projects' : projects,
 		'tasks' : tasks,
+		'memos' : memos,
 		'documents' : documents,
 		'project_form' : project_form,
 	})
