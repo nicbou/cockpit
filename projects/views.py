@@ -216,6 +216,30 @@ def task_status(request,task_id,task_status):
 	task.save()
 	return HttpResponse(status=200)
 
+	
+@login_required
+def memo_edit(request,memo_id): #Returns or processes an AJAX form
+	memo = get_object_or_404(Memo,id=memo_id)
+	if user_can_access(request.user,memo.project_id):
+		memo_form = MemoAddForm(request.POST,instance=memo,prefix="memo")
+		if not request.POST:
+			return render(request,"memo_form_ajax.html",{
+				'memo_form' : memo_form
+			})
+		elif 'title' in request.POST and 'content' in request.POST:
+			if memo_form.is_valid():
+				edit_memo = memo_form.save(commit=False)
+				edit_memo.project_id = memo.project_id
+				edit_memo.save()
+				return HttpResponse(status=200)
+			else:
+				return HttpResponse("1",status=200)
+		else:
+			return HttpResponse(status=400)#Bad request
+	else:
+		return HttpResponse(status=403)#Forbidden
+
+		
 @login_required()
 def task_list(request,project_id=None):
 	company_id = request.user.get_profile().company.id
