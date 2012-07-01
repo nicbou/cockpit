@@ -110,7 +110,7 @@
 					<tr>
 						<td>{{ memo.title }}</td>
 						<td>{{ memo.content|linebreaksbr }}</td>
-						<td>{{ memo.date.date }}</td>
+						<td>{{ memo.date_modified.date }}</td>
 						<td><a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a></td>
 					</tr>
 				{% endfor %}
