@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from Crypto.Cipher import Blowfish
 from django.conf import settings
+from django.utils.safestring import mark_safe
 import binascii
 import hashlib
 import magic
@@ -95,7 +96,7 @@ class Document (Descriptible):
 class Memo (models.Model):
 	project = models.ForeignKey(Project)
 	title = models.CharField(max_length=200)
-	content = models.TextField()
+	content = models.TextField(help_text=mark_safe("Memos support <a target='_blank' href='http://en.wikipedia.org/wiki/Markdown'>Markdown</a>"))
 	creation_date = models.DateTimeField(auto_now_add=True)
 	date_modified = models.DateTimeField(auto_now=True)
 	class Meta:

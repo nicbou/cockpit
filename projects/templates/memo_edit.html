@@ -10,7 +10,9 @@
 		{% for field in memo_form %}
 			<div class="fieldwrap">
 				{{ field.errors }}
-				{{ field.label_tag }}{{ field }}
+				{{ field }}
+				{{ field.label_tag }}<br/>
+				{% if field.help_text %}<span class="help-text">{{ field.help_text }}</span>{% endif %}
 			</div>
 		{% endfor %}
 		<div class="fieldwrap">

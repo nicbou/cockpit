@@ -64,6 +64,9 @@ form,table,ul,ol{max-width:840px}/*This fix a jQuery bug in webkit where element
 	
 	form{border:1px solid #ddd;background:#eee;padding:30px 30px 15px}
 		textarea,input,select{font:14px/20px Arial,sans-serif}
+		.help-text{font-size:80%;color:#999}
+			.help-text a{color:#99f;text-decoration:none}
+			.help-text a:hover{text-decoration:underline}
 		form.edit_form{border:0;background:transparent;padding:0}
 			.edit_form table input,.edit_form textarea,.edit_form select{border:1px solid rgba(0,0,0,0.1);display:block;background:transparent;margin:0;outline:0;line-height:20px;cursor:pointer}
 			.changed{border-color:#00f!important}
