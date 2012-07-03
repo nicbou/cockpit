@@ -63,6 +63,9 @@ form,table,ul,ol{max-width:840px}/*This fix a jQuery bug in webkit where element
 	
 	form{border:1px solid #ddd;background:#eee;padding:30px 30px 15px}
 		textarea,input,select{font:14px/20px Arial,sans-serif}
+		.help-text{color:#999;font-size:80%}
+			.help-text a{text-decoration:none;color:#99f}
+			.help-text a:hover{text-decoration:underline}
 		form.edit_form{border:0;background:transparent;padding:0}
 			.edit_form table input,.edit_form textarea,.edit_form select{border:1px solid rgba(0,0,0,0.1);display:block;background:transparent;margin:0;outline:0;line-height:20px;cursor:pointer}
 			.changed{border-color:#00f!important}
@@ -75,6 +78,7 @@ form,table,ul,ol{max-width:840px}/*This fix a jQuery bug in webkit where element
 			.fieldwrap input, .fieldwrap select, .fieldwrap textarea{float:right;margin:0 0 15px;width:600px}
 			.fieldwrap select{width:610px}
 			.fieldwrap textarea{height:60px}
+				#id_memo-content{height:200px}
 			.fieldwrap #id_message{height:140px}
 			.fieldwrap.hidden{display:none}
 			#ui-datepicker-div{display:none;background:#fff;padding:15px;box-shadow:2px 5px 15px rgba(0,0,0,0.3)}
