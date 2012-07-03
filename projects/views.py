@@ -221,7 +221,7 @@ def task_status(request,task_id,task_status):
 def memo_edit(request,memo_id): #Returns or processes an AJAX form
 	memo = get_object_or_404(Memo,id=memo_id)
 	if user_can_access(request.user,memo.project_id):
-		memo_form = MemoAddForm(request.POST,instance=memo,prefix="memo")
+		memo_form = MemoAddForm(instance=memo,prefix="memo")
 		if not request.POST:
 			return render(request,"memo_form_ajax.html",{
 				'memo_form' : memo_form
