@@ -227,13 +227,13 @@ def memo_edit(request,memo_id): #Returns or processes an AJAX form
 				'memo' : memo,
 				'memo_form' : memo_form
 			})
-		if 'title' in request.POST and 'content' in request.POST:
+		if request.POST:
 			memo_form = MemoAddForm(request.POST,instance=memo,prefix="memo")
 			if memo_form.is_valid():
 				edit_memo = memo_form.save(commit=False)
 				edit_memo.project_id = memo.project_id
 				edit_memo.save()
-				return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#memos")
+				return HttpResponseRedirect(reverse('project_single', args=[memo.project_id]) + "#memos")
 		#The code below only runs if the form is not valid, or not yet submitted
 		memo_form = MemoAddForm(instance=memo,prefix="memo")
 		return render(request,"memo_edit.html",{
