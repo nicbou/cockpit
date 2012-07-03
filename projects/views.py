@@ -221,23 +221,27 @@ def task_status(request,task_id,task_status):
 def memo_edit(request,memo_id): #Returns or processes an AJAX form
 	memo = get_object_or_404(Memo,id=memo_id)
 	if user_can_access(request.user,memo.project_id):
-		memo_form = MemoAddForm(instance=memo,prefix="memo")
 		if not request.POST:
-			return render(request,"memo_form_ajax.html",{
+			memo_form = MemoAddForm(instance=memo,prefix="memo")
+			return render(request,"memo_edit.html",{
+				'memo' : memo,
 				'memo_form' : memo_form
 			})
-		elif 'title' in request.POST and 'content' in request.POST:
+		if 'title' in request.POST and 'content' in request.POST:
+			memo_form = MemoAddForm(request.POST,instance=memo,prefix="memo")
 			if memo_form.is_valid():
 				edit_memo = memo_form.save(commit=False)
 				edit_memo.project_id = memo.project_id
 				edit_memo.save()
-				return HttpResponse(status=200)
-			else:
-				return HttpResponse("1",status=200)
-		else:
-			return HttpResponse(status=400)#Bad request
+				return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#memos")
+		#The code below only runs if the form is not valid, or not yet submitted
+		memo_form = MemoAddForm(instance=memo,prefix="memo")
+		return render(request,"memo_edit.html",{
+			'memo' : memo,
+			'memo_form' : memo_form
+		})
 	else:
-		return HttpResponse(status=403)#Forbidden
+		return HttpResponse("You are not allowed to access this",status=403)#Forbidden
 
 		
 @login_required()
