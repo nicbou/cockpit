@@ -11,31 +11,7 @@
 	</ul>
 	<div id="projects">
 		<h2 class="floatfix">Projects</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Project</th>
-					<th>Description</th>
-					<th>Deadline</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for project in projects %}
-					<tr class="status-{{ project.status }}">
-						<td><a href="{% url projects.views.project_single project.id %}">{{ project.title }}</a></td>
-						<td>{{ project.description }}</td>
-						<td title="{{ project.time_left_days }} days left">{{ project.deadline }}</td>
-						<td class="status">
-							<a class="active {% if project.status = project.ACTIVE %} current{% endif %}" href="{% url projects.views.project_status project.id project.ACTIVE %}">&nbsp;</a>
-							<a class="important {% if project.status = project.IMPORTANT %} current{% endif %}" href="{% url projects.views.project_status project.id project.IMPORTANT %}">&nbsp;</a>
-							<a class="hold {% if project.status = project.HOLD %} current{% endif %}" href="{% url projects.views.project_status project.id project.HOLD %}">&nbsp;</a>
-							<a class="completed {% if project.status = project.COMPLETED %} current{% endif %}" href="{% url projects.views.project_status project.id project.COMPLETED %}">&nbsp;</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		{% include "project_list.html" %}
 		<form method="POST" enctype="multipart/form-data" action="">
 			<h3>Start a new project</h3>
 			{% csrf_token %}
@@ -54,83 +30,14 @@
 	<div id="tasks">
 		<a class="title-action" href="{% url projects.views.task_list %}">See all tasks</a>
 		<h2>Most important tasks</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Task</th>
-					<th>Project</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for task in tasks %}
-					<tr class="status-{{ task.status }}">
-						<td class="title"><a href="{% url projects.views.project_single task.project_id %}#tasks">{{ task.title }}</a></td>
-						<td class="project">{{ task.project.title }}</td>
-						<td class="status">
-							<a title="High priority" class="important {% if task.status = task.IMPORTANT %} current{% endif %}" href="{% url projects.views.task_status task.id task.IMPORTANT %}">&nbsp;</a>
-							<a title="Active" class="active {% if task.status = task.ACTIVE %} current{% endif %}" href="{% url projects.views.task_status task.id task.ACTIVE %}">&nbsp;</a>
-							<a title="On hold" class="hold {% if task.status = task.HOLD %} current{% endif %}" href="{% url projects.views.task_status task.id task.HOLD %}">&nbsp;</a>
-							<a title="Completed" class="completed {% if task.status = task.COMPLETED %} current{% endif %}" href="{% url projects.views.task_status task.id task.COMPLETED %}">&nbsp;</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		{% include "task_list.html" %}
 	</div>
 	<div id="memos">
 		<h2>Latest memos</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Message</th>
-					<th>Date</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for memo in memos %}
-					<tr>
-						<td>{{ memo.title }}</td>
-						<td>{{ memo.content|linebreaksbr }}</td>
-						<td>{{ memo.date_modified.date }}</td>
-						<td>
-							<a class="button edit" href="{% url projects.views.memo_edit memo.id %}">&nbsp;</a>
-							<a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>	
+		{% include "memo_list.html" %}
 	</div>
 	<div id="documents">
 		<h2>Latest documents</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Description</th>
-					<th>Date</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% load comments %}
-				{% for document in documents %}
-					<tr>
-						<td><a href="{% url projects.views.document_single document.id %}">{{ document.title }}</a></td>
-						<td>{{ document.description }}</td>
-						<td>{{ document.creation_date.date }}</td>
-						<td>
-							<a title="Download this document" class="button download" href="/{{ document.file.name }}">&nbsp;</a>
-							<a title="Share this document" class="button share" href="{% url projects.views.document_single document.id %}#share">&nbsp;</a>
-							<a title="See comments for this document" class="button comments" href="{% url projects.views.document_single document.id %}#comments">{% get_comment_count for document as comment_count %}{{comment_count}}</a>
-							<a title="Delete this document" class="button delete" href="{% url projects.views.document_delete document.id %}#documents">&nbsp;</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		{% include "document_list.html" %}
 	</div>
 {% endblock %}

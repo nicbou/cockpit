@@ -1,0 +1,25 @@
+<table>
+	<thead>
+		<tr>
+			<th>Project</th>
+			<th>Description</th>
+			<th>Deadline</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for project in projects %}
+			<tr class="status-{{ project.status }}">
+				<td><a href="{% url projects.views.project_single project.id %}">{{ project.title }}</a></td>
+				<td>{{ project.description }}</td>
+				<td title="{{ project.time_left_days }} days left">{{ project.deadline }}</td>
+				<td class="status">
+					<a class="active {% if project.status = project.ACTIVE %} current{% endif %}" href="{% url projects.views.project_status project.id project.ACTIVE %}">&nbsp;</a>
+					<a class="important {% if project.status = project.IMPORTANT %} current{% endif %}" href="{% url projects.views.project_status project.id project.IMPORTANT %}">&nbsp;</a>
+					<a class="hold {% if project.status = project.HOLD %} current{% endif %}" href="{% url projects.views.project_status project.id project.HOLD %}">&nbsp;</a>
+					<a class="completed {% if project.status = project.COMPLETED %} current{% endif %}" href="{% url projects.views.project_status project.id project.COMPLETED %}">&nbsp;</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

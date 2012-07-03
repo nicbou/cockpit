@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-	<link rel="stylesheet" href="/static/style.css" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/static/project.js"></script>
-	<script type="text/javascript" src="/static/flot/jquery.flot.js"></script>
-	<script type="text/javascript" src="/static/flot/jquery.flot.pie.js"></script>
-	{% block head %}{% endblock %}
-</head>
-<body>
-<div id="wrapper">
-	{% block account %}<a href="/logout" class="logout">Logout</a>{% endblock %}
-	<div id="breadcrumbs">{% block breadcrumbs %}{% endblock %}</div>
-	<div id="header">
-		<h1>{% block title %}{% endblock %}</h1>
-		<p>{% block subtitle %}{% endblock %}</p>
-	</div>
+{% extends "base.html" %}
+{% block main%}
 	<div id="tabs">
 		{% block content %}{% endblock %}
 	</div>
-</div>
-</body>
-</html>
+{% endblock %}
