@@ -4,16 +4,17 @@
 		<tr>
 			<th>Title</th>
 			<th>Message</th>
-			<th>Date</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for memo in memos %}
 			<tr>
-				<td>{{ memo.title }}</td>
+				<td>
+					{{ memo.title }}<br/>
+					<span class="memo-date">{{ memo.date_modified.date }}</span>
+				</td>
 				<td class="memo-content">{{ memo.content|markdown:"safe_mode" }}</td>
-				<td>{{ memo.date_modified.date }}</td>
 				<td>
 					<a class="button edit" href="{% url projects.views.memo_edit memo.id %}">&nbsp;</a>
 					<a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a>
