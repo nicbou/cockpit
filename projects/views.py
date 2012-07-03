@@ -259,7 +259,23 @@ def task_list(request,project_id=None):
 		'project' : project
 	})
 
+	
+@login_required()
+def task_all(request,project_id=None):
+	company_id = request.user.get_profile().company.id
+	if not project_id == None:
+		tasks = Task.objects.filter(project = project_id).exclude(status = 0)
+		project = get_object_or_404(Project,id=project_id)
+	else:
+		projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
+		tasks = Task.objects.filter(project__in = projects).exclude(status = 0)
+		project = None
+	return render(request,"task_all.html",{
+		'tasks' : tasks,
+		'project' : project
+	})
 
+	
 @login_required()
 def project_status(request,project_id,project_status):
 	project = get_object_or_404(Project,id=project_id)
