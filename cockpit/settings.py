@@ -1,6 +1,6 @@
 # Django settings for cockpit project.
 
-#Import database settings
+#Import database and email settings
 from database import *
 
 DEBUG = True
@@ -15,12 +15,6 @@ LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/login"
 AUTH_PROFILE_MODULE = 'projects.UserProfile'
-
-#EMAIL
-EMAIL_HOST = 'mail.nicolasbouliane.com'
-EMAIL_HOST_USER = 'contact@nicolasbouliane.com'
-EMAIL_HOST_PASSWORD = 'canned2na'
-EMAIL_PORT = '25'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -120,10 +114,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.markup',
     'django.contrib.comments',
     'projects',
 )

@@ -40,6 +40,10 @@ form,table,ul,ol{max-width:840px}/*This fix a jQuery bug in webkit where element
 					.status .completed{background:url('/static/task-completed.png')}
 				.status-1 td,.status-0 td{color:#999}
 				.status-1 a,.status-0 a{color:#999}
+			.memo-content{}
+				.memo-content p{margin:0}
+				.memo-content ul{margin:0;padding:0}
+				.memo-content li{margin:0 0 0 20px;list-style:outside;padding:0}
 			.delete,.download,.share,.comments,.edit{opacity:0.5}
 				.edit{background:url('/static/edit.png')}
 				.delete{background:url('/static/delete.png')}
