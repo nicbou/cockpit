@@ -1,4 +1,5 @@
 <table>
+	{% load markup %}
 	<thead>
 		<tr>
 			<th>Title</th>
@@ -11,7 +12,7 @@
 		{% for memo in memos %}
 			<tr>
 				<td>{{ memo.title }}</td>
-				<td>{{ memo.content|linebreaksbr }}</td>
+				<td class="memo-content">{{ memo.content|markdown:"safe_mode" }}</td>
 				<td>{{ memo.date_modified.date }}</td>
 				<td>
 					<a class="button edit" href="{% url projects.views.memo_edit memo.id %}">&nbsp;</a>
