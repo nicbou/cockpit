@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = "/login"
-AUTH_PROFILE_MODULE = 'projects.UserProfile'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.comments',
     'projects',
+    'accounts',
 )
 
 # A sample logging configuration. The only tangible logging
