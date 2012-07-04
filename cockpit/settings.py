@@ -2,6 +2,7 @@
 
 #Import database and email settings
 from database import *
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -42,6 +43,7 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+SITE_ROOT = os.path.dirname(__file__)
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
@@ -63,6 +65,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(SITE_ROOT, 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -102,6 +105,7 @@ ROOT_URLCONF = 'cockpit.urls'
 WSGI_APPLICATION = 'cockpit.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(SITE_ROOT, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

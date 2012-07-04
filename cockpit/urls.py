@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.contrib import admin
 admin.autodiscover()
@@ -38,6 +40,5 @@ urlpatterns = patterns('',
 	(r'^logout/$', 'projects.views.user_logout'),
 	
 	#Static files and documents
-	(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/var/www-python/static'}),
 	(r'^documents/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/var/www-python/cockpit/documents'}),
 	)
