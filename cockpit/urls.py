@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 	(r'^comments/', include('django.contrib.comments.urls')),
 	
 	#User profile
-	#(r'^profile/$', 'projects.views.user_profile'),
+	(r'^profile/$', 'accounts.views.user_profile'),
 	
 	#Company profile
 	#(r'^company/$', 'projects.views.company_profile'),
