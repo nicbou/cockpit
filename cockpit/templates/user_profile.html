@@ -1,22 +1,44 @@
-{% extends "base.html" %}
+{% extends "base_tabs.html" %}
 {% block breadcrumbs %}
 	Account » User profile
 {% endblock %}
 {% block title %}{{ user.first_name }}'s profile{% endblock %}
 {% block subtitle %}View and edit your user profile{% endblock %}
 {% block content %}
-	<form method="POST" action="">
-		<h3>Edit your profile</h3>
-		{% csrf_token %}
-		{% for field in profile_form %}
+	<ul>
+		<li><a href="#profile">Profile</a></li>
+		<li><a href="#password">Password change</a></li>
+	</ul>
+	<div id="profile">
+		<form method="POST" action="">
+			<h3>Edit your profile</h3>
+			{% csrf_token %}
+			{% for field in profile_form %}
+				<div class="fieldwrap">
+					{{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
 			<div class="fieldwrap">
-				{{ field.errors }}
-				{{ field.label_tag }}{{ field }}
+				<input name="project_form" class="submit" type="submit" />
 			</div>
-		{% endfor %}
-		<div class="fieldwrap">
-			<input name="project_form" class="submit" type="submit" />
-		</div>
-		<div class="floatfix"></div>
-	</form>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+	<div id="password">
+		<form method="POST" action="">
+			<h3>Change your password</h3>
+			{% csrf_token %}
+			{% for field in password_form %}
+				<div class="fieldwrap">
+					{{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
+			<div class="fieldwrap">
+				<input name="password_form" class="submit" type="submit" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
 {% endblock %}
