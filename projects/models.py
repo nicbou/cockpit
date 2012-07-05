@@ -1,7 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.db import models
-from Crypto.Cipher import Blowfish
 from django.conf import settings
 from django.utils.safestring import mark_safe
 import binascii
@@ -23,10 +20,6 @@ class Company (models.Model):
 	is_active = models.BooleanField(default=True)
 	def __unicode__(self):
 		return self.name
-	
-class UserProfile (models.Model):
-	user = models.OneToOneField(User)
-	company = models.ForeignKey(Company)
 
 class Project (Descriptible):
 	company = models.ForeignKey(Company)

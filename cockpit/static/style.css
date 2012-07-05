@@ -1,7 +1,7 @@
 body{width:100%;height:100%;font:14px/20px Arial,sans-serif;background:#f6f6f6}
 form,table,ul,ol{max-width:840px}/*This fix a jQuery bug in webkit where elements that are 100% width overflow the tab panels*/
 #wrapper{width:900px;padding:0 30px 30px;margin:0 auto}
-	.logout{float:right}
+	#user_menu{float:right}
 	.ui-tabs-hide{display:none!important}
 		.ui-tabs-nav{margin:0;padding:0;height:45px}
 			.ui-tabs-nav li{float:left;list-style:none;margin:0;padding:0}
