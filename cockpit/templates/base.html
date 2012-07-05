@@ -10,7 +10,11 @@
 </head>
 <body>
 <div id="wrapper">
-	{% block account %}<a href="/logout" class="logout">Logout</a>{% endblock %}
+	{% block account %}
+		<span id="user_menu">
+			<a href="/profile" class="profile">Profile</a> | <a href="/logout" class="logout">Logout</a>
+		</span>
+	{% endblock %}
 	<div id="breadcrumbs">{% block breadcrumbs %}{% endblock %}</div>
 	<div id="header">
 		<h1>{% block title %}{% endblock %}</h1>
