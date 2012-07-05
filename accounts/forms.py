@@ -12,8 +12,8 @@ class UserProfileForm(ModelForm):
 		fields=('first_name', 'last_name', 'email')
 		
 class PasswordChangeForm(forms.Form):
-	password1 = forms.CharField(max_length=20, widget=forms.PasswordInput())
-	password2 = forms.CharField(max_length=20, widget=forms.PasswordInput())
+	password1 = forms.CharField(label='New password',max_length=20, widget=forms.PasswordInput())
+	password2 = forms.CharField(label='Repeat password',max_length=20, widget=forms.PasswordInput())
 	
 	def clean_password2(self):
 		if self.cleaned_data.get('password1') and self.cleaned_data.get('password2') and self.cleaned_data['password1'] != self.cleaned_data['password2']:
