@@ -121,10 +121,12 @@
 							</div>
 						{% endif %}
 					{% else %}
-						<div class="fieldwrap {% if field.name == "honeypot" %}hidden{% endif %}">
-							{{ field.errors }}
-							{{ field.label_tag }}{{ field }}
-						</div>
+						{% if field.name != "url" %}
+							<div class="fieldwrap {% if field.name == "honeypot" %}hidden{% endif %}">
+								{{ field.errors }}
+								{{ field.label_tag }}{{ field }}
+							</div>
+						{% endif %}
 					{% endif %}
 				{% endfor %}
 				<div class="fieldwrap">
