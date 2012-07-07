@@ -1,4 +1,4 @@
-<table>
+<table class="memo-list">
 	{% load markup %}
 	<thead>
 		<tr>
@@ -10,12 +10,12 @@
 	<tbody>
 		{% for memo in memos %}
 			<tr>
-				<td>
+				<td class="title">
 					{{ memo.title }}<br/>
 					<span class="memo-date">{{ memo.date_modified.date }}</span>
 				</td>
 				<td class="memo-content">{{ memo.content|markdown:"nl2br" }}</td>
-				<td>
+				<td class="actions">
 					<a class="button edit" href="{% url projects.views.memo_edit memo.id %}">&nbsp;</a>
 					<a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a>
 				</td>

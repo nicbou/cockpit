@@ -1,4 +1,4 @@
-<table>
+<table class="project-list">
 	<thead>
 		<tr>
 			<th>Project</th>
@@ -10,7 +10,7 @@
 	<tbody>
 		{% for project in projects %}
 			<tr class="status-{{ project.status }}">
-				<td><a href="{% url projects.views.project_single project.id %}">{{ project.title }}</a></td>
+				<td class="title"><a href="{% url projects.views.project_single project.id %}">{{ project.title }}</a></td>
 				<td>{{ project.description }}</td>
 				<td title="{{ project.time_left_days }} days left">{{ project.deadline }}</td>
 				<td class="status">
