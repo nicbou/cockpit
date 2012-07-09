@@ -17,11 +17,11 @@ a{text-decoration:none}
 	#header{color:#fff}
 		#header h1{margin:30px 0 0;font-size:40px;line-height:100%}
 		#header p{margin:0 0 30px}
-	#top-bar{vertical-align:top;background:#779;height:45px;margin:0;padding:0;box-shadow:0 14px 10px -10px rgba(0, 0, 0, 0.3)}
+	#top-bar{border-radius:0 0 5px 5px;vertical-align:top;background:#779;height:45px;margin:0;padding:0;box-shadow:0 14px 10px -10px rgba(0, 0, 0, 0.3)}
 		#top-bar a{float:left;display:inline-block}
 		#top-bar a:first-child{border-left:0!important}
 		#top-bar a:last-child{border-right:0!important}
-		#home-icon{background:#779 url('home-icon.png') no-repeat center!important;width:10px;height:45px}
+		#home-icon{background:url('home-icon.png') no-repeat center!important;width:10px;height:45px}
 		#user-menu{float:right;color:#aab}
 		#user-menu a{color:#ccf}
 	.ui-tabs-hide{display:none!important}
