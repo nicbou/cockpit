@@ -15,16 +15,20 @@ a{text-decoration:none}
 
 #wrapper{width:900px;padding:0 30px 30px;margin:0 auto}
 	#header{color:#fff}
-		#header h1{margin:20px 0 0;font-size:40px;line-height:100%}
+		#header h1{margin:30px 0 0;font-size:40px;line-height:100%}
 		#header p{margin:0 0 30px}
-	#breadcrumbs,#user_menu{color:#aab}
-		#breadcrumbs a,#user_menu a{color:#ccf}
-		#breadcrumbs a:hover,#user_menu a:hover{color:#f60}
-	#user_menu{float:right;margin:20px 0 0}
+	#top-bar{vertical-align:top;background:#779;height:45px;margin:0;padding:0;box-shadow:0 14px 10px -10px rgba(0, 0, 0, 0.3)}
+		#top-bar a{float:left;display:inline-block}
+		#top-bar a:first-child{border-left:0!important}
+		#top-bar a:last-child{border-right:0!important}
+		#home-icon{background:#779 url('home-icon.png') no-repeat center!important;width:10px;height:45px}
+		#user-menu{float:right;color:#aab}
+		#user-menu a{color:#ccf}
 	.ui-tabs-hide{display:none!important}
 		.ui-tabs-nav{margin:0;padding:0;height:46px}
 			.ui-tabs-nav li{float:left;list-style:none;margin:0;padding:0}
-				.ui-tabs-nav li a{text-shadow:0 -1px 0 #556;display:block;border-right:1px solid #667;border-top:1px solid #889;border-left:1px solid #889;padding:0 20px;line-height:45px;color:#fff;background:#779}
+				.ui-tabs-nav li a,#top-bar a{text-shadow:0 -1px 0 #556;display:inline-block;border-right:1px solid #667;border-left:1px solid #889;padding:0 20px;line-height:45px;color:#fff}
+				.ui-tabs-nav li a{background:#779;border-top:1px solid #889}
 				.ui-tabs-nav .ui-state-active a{text-shadow:none;border:0;border-top:1px solid #fff;color:#000;background:#fff;cursor:text}
 				.ui-tabs-nav li:first-child a{border-radius:5px 0 0 0}
 				.ui-tabs-nav li:last-child a{border-radius:0 5px 0 0}
