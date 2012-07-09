@@ -19,16 +19,17 @@ a{text-decoration:none}
 		#header p{margin:0 0 30px}
 	#breadcrumbs,#user_menu{color:#aab}
 		#breadcrumbs a,#user_menu a{color:#ccf}
-		#breadcrumbs a:hover,#user_menu a:hover{color:#ff9}
-	#user_menu{float:right}
+		#breadcrumbs a:hover,#user_menu a:hover{color:#f60}
+	#user_menu{float:right;margin:20px 0 0}
 	.ui-tabs-hide{display:none!important}
-		.ui-tabs-nav{margin:0;padding:0;height:45px}
+		.ui-tabs-nav{margin:0;padding:0;height:46px}
 			.ui-tabs-nav li{float:left;list-style:none;margin:0;padding:0}
 				.ui-tabs-nav li a{text-shadow:0 -1px 0 #556;display:block;border-right:1px solid #667;border-top:1px solid #889;border-left:1px solid #889;padding:0 20px;line-height:45px;color:#fff;background:#779}
 				.ui-tabs-nav .ui-state-active a{text-shadow:none;border:0;border-top:1px solid #fff;color:#000;background:#fff;cursor:text}
 				.ui-tabs-nav li:first-child a{border-radius:5px 0 0 0}
 				.ui-tabs-nav li:last-child a{border-radius:0 5px 0 0}
 	#content,.ui-tabs-panel{background:#fff;padding:30px;border-radius:0 5px 5px 5px}
+		#content{border-radius:5px}
 		h2{margin:0 0 20px}
 		.title-action{float:right}
 		#timeleft{padding:15px 5px}
