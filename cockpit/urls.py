@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-	#Models
+	#Projects
 	url(r'^$', 'projects.views.index', name='home'),
 	url(r'^comments/delete/(\d+)$', 'projects.views.comment_delete', name='comment_delete'), 
 	url(r'^documents/(\d+)$', 'projects.views.document_single', name='document_single'),
@@ -24,6 +24,9 @@ urlpatterns = patterns('',
 	url(r'^tasks/(\d+)/(\d+)$', 'projects.views.task_status', name='task_status'),
 	url(r'^admin/', include(admin.site.urls)),
 	(r'^comments/', include('django.contrib.comments.urls')),
+	
+	#Contacts
+	url(r'^contacts$', 'contacts.views.contact_list', name='contact_list'),
 	
 	#User profile
 	(r'^profile/$', 'accounts.views.user_profile'),

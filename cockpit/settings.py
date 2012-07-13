@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'projects',
     'accounts',
+    'contacts',
 )
 
 # A sample logging configuration. The only tangible logging

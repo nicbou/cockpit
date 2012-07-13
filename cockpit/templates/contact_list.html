@@ -1,0 +1,18 @@
+<table class="contact-list">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Title</th>			<th>Phone</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for contact in contacts %}
+			<tr>
+				<td class="title"><a href="{% url projects.views.contact_single contact.id %}">{{ contact.get_full_name }}</a></td>
+				<td>{{ contact.title }}</td>
+				<td>{{ contact.phone }}</td>				<td>{{ contact.email }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
