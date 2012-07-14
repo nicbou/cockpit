@@ -58,6 +58,7 @@ a{text-decoration:none}
 			th:last-child,td:last-child{padding-right:10px}
 			tr:nth-child(even) td{background:#eee}
 			tr:nth-child(odd) td{background:#f6f6f6}
+			td p{margin:0}
 		td{border-top:1px solid #fff;border-bottom:1px solid #ddd}
 			.status,.document-list .actions{max-width:111px;width:111px}
 				.status a,.button{display:inline-block;float:left;width:24px;height:24px;opacity:0.1}
@@ -74,7 +75,6 @@ a{text-decoration:none}
 			.memo-list .actions{max-width:63px;width:63px}
 				.memo-date{color:#999;font-size:80%}
 				.memo-content{padding-left:10px;padding-right:10px}
-					.memo-content p{margin:0}
 					.memo-content ul{margin:0;padding:0}
 					.memo-content li{margin:0 0 0 20px;list-style:outside square;padding:0}
 			.delete,.download,.share,.comments,.edit{opacity:0.5}
@@ -83,6 +83,9 @@ a{text-decoration:none}
 				.download{background:url('/static/download.png')}
 				.comments{background:url('/static/comment.png');text-align:center;font-size:11px;color:#55a}
 				.share{background:url('/static/share.png')}
+			
+			.contact-list{}
+				.type{color:#999;display:inline-block;min-width:55px;margin:0 5px 0 0}
 				
 			.button-big, .submit{padding:10px 15px!important;border:none!important;width:auto!important;height:auto;background:#55a;display:inline-block;color:#fff;cursor:pointer;border-radius:5px}
 			.button-big:hover,.submit:hover{background:#77b}

@@ -11,7 +11,15 @@
 			<tr>
 				<td class="title"><a href="{% url contacts.views.contact_single contact.id %}">{{ contact.get_full_name }}</a></td>
 				<td>{{ contact.title }}</td>
-				<td>{{ contact.phone }}</td>				<td>{{ contact.email }}</td>
+				<td>
+					{% for phone in contact.phonenumbers %}
+						<p><span class="type">{{ phone.get_type_display }}</span>{{ phone.number }}</p>
+					{% endfor %}
+				</td>				<td>
+					{% for email in contact.emailaddresses %}
+						<p><span class="type">{{ email.get_type_display }}</span>{{ email.email }}</p>
+					{% endfor %}
+				</td>
 			</tr>
 		{% endfor %}
 	</tbody>
