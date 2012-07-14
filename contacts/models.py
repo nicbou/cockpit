@@ -1,5 +1,6 @@
 from django.db import models
 from projects.models import *
+from django.forms.models import inlineformset_factory
 
 
 #Similar to Django's groups, but without the bloat
@@ -56,21 +57,21 @@ class PhoneNumber(models.Model):
 class EmailAddress(models.Model):
 	Contact = models.ForeignKey(Contact)
 	email = models.CharField(max_length = 255)
-	ContactAL = 0
+	PERSONAL = 0
 	WORK = 1
 	OTHER = 2
 	TYPE_CHOICES = (
-		(ContactAL, 'Contactal'),
+		(PERSONAL, 'Personal'),
 		(WORK, 'Work'),
 		(OTHER, 'Other')
 	)
-	type = models.SmallIntegerField(choices=TYPE_CHOICES, default=ContactAL)
+	type = models.SmallIntegerField(choices=TYPE_CHOICES, default=PERSONAL)
 
 
 #URLs for contacts
 class Website(models.Model):
 	Contact = models.ForeignKey(Contact)
-	url = models.CharField(max_length = 255)
+	url = models.CharField('Website URL',max_length = 255)
 	WEBSITE = 0
 	SOCIAL = 1
 	OTHER = 2
