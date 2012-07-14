@@ -27,6 +27,7 @@ urlpatterns = patterns('',
 	
 	#Contacts
 	url(r'^contacts$', 'contacts.views.contact_list', name='contact_list'),
+	url(r'^contacts/(\d+)$', 'contacts.views.contact_single', name='contact_single'),
 	
 	#User profile
 	(r'^profile/$', 'accounts.views.user_profile'),
