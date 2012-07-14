@@ -127,7 +127,9 @@ a{text-decoration:none}
 				.ui-datepicker-title{text-align:center;padding:5px 0;margin:0 0 15px}
 				.ui-datepicker-calendar{table-layout:fixed;width:230px}
 					.ui-datepicker-calendar td{text-align:center}
-		.formset{}
+		.formset{padding-top:15px;border-top:1px solid #ddd}
+			.formset input[type=text]{width:200px}
+			.formset select{min-width:130px}
 			.formsetfieldwrap{float:right;margin:0 0 15px;width:613px}
 			.inlinefieldwrap{float:left}
 			.inlinefieldwrap label{display:block}

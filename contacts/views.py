@@ -10,9 +10,9 @@ def contact_list(request):
 	company_id = request.user.get_profile().company.id
 	contacts = Contact.objects.filter(company_id = company_id)
 	
-	PhoneNumberFormSet = inlineformset_factory(Contact, PhoneNumber, can_delete=True)
-	EmailAddressFormSet = inlineformset_factory(Contact, EmailAddress, can_delete=True)    
-	WebsiteFormSet = inlineformset_factory(Contact, Website, can_delete=True)    
+	PhoneNumberFormSet = inlineformset_factory(Contact, PhoneNumber, can_delete=False)
+	EmailAddressFormSet = inlineformset_factory(Contact, EmailAddress, can_delete=False)    
+	WebsiteFormSet = inlineformset_factory(Contact, Website, can_delete=False)    
 	
 	if request.POST:
 		contact = Contact()
