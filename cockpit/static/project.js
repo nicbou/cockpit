@@ -30,7 +30,7 @@ $(document).ready(function(){
 		$(this).addClass('current');
 	});
 	
-	//Task status changes
+	//Comment delete
 	$('.comment-delete').click(function(e){
 		e.preventDefault();
 		$.ajax({
@@ -42,4 +42,19 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+
+	//Contact info delete
+	$('.phonenumber .delete,.emailaddress .delete,.website .delete').click(function(e){
+		e.preventDefault();
+		$.ajax({
+			context: this,
+			type: "GET",
+			url: $(this).attr('href'),
+			success: function(data){
+				$(this).parents('.formsetfieldwrap').slideUp({duration:300,queue:false}).fadeOut({duration:300,queue:false});
+			}
+		});
+	});
+	
 });

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
 @login_required()
@@ -85,3 +86,46 @@ def contact_single(request,contact_id):
 		'website_formset' : website_formset,
 		'formset' : formset,
 	})
+
+	
+@login_required()
+def phonenumber_delete(request,phonenumber_id):
+	phonenumber = get_object_or_404(PhoneNumber.objects.select_related(),id=phonenumber_id)
+	
+	if user_can_access_company(request.user,phonenumber.contact.company_id):
+		contact_id = phonenumber.contact_id
+		phonenumber.delete()
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('contacts.views.contact_single',args=[contact_id]))
+	else:
+		return HttpResponse("You are not allowed to access this",status=403)
+		
+@login_required()
+def emailaddress_delete(request,emailaddress_id):
+	emailaddress = get_object_or_404(EmailAddress.objects.select_related(),id=emailaddress_id)
+	
+	if user_can_access_company(request.user,emailaddress.contact.company_id):
+		contact_id = emailaddress.contact_id
+		emailaddress.delete()
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('contacts.views.contact_single',args=[contact_id]))
+	else:
+		return HttpResponse("You are not allowed to access this",status=403)
+		
+@login_required()
+def website_delete(request,website_id):
+	website = get_object_or_404(Website.objects.select_related(),id=website_id)
+	
+	if user_can_access_company(request.user,website.contact.company_id):
+		contact_id = website.contact_id
+		website.delete()
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('contacts.views.contact_single',args=[contact_id]))
+	else:
+		return HttpResponse("You are not allowed to access this",status=403)

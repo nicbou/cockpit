@@ -16,13 +16,18 @@
 			<label for="">Phone numbers</label>
 			{{ phonenumber_formset.management_form }}
 			{% for formset in phonenumber_formset.forms %}
-				<div class="formsetfieldwrap">
+				<div class="formsetfieldwrap phonenumber">
 					{% for field in formset.visible_fields %}
 						<div class="inlinefieldwrap">
 							{{ field.errors }}
 							{{ field }}
 						</div>
 					{% endfor %}
+					{% if not formset.instance.id = None %}
+						<div class="inlinefieldwrap">
+							<a class="button delete" href="{% url contacts.views.phonenumber_delete formset.instance.id %}"></a>
+						</div>
+					{% endif %}
 					{% for field in formset.hidden_fields %}
 						{{ field }}
 					{% endfor %}
@@ -34,13 +39,18 @@
 			<label for="">Websites</label>
 			{{ emailaddress_formset.management_form }}
 			{% for formset in emailaddress_formset.forms %}
-				<div class="formsetfieldwrap">
+				<div class="formsetfieldwrap emailaddress">
 					{% for field in formset.visible_fields %}
 						<div class="inlinefieldwrap">
 							{{ field.errors }}
 							{{ field }}
 						</div>
 					{% endfor %}
+					{% if not formset.instance.id = None %}
+						<div class="inlinefieldwrap">
+							<a class="button delete" href="{% url contacts.views.emailaddress_delete formset.instance.id %}"></a>
+						</div>
+					{% endif %}			
 					{% for field in formset.hidden_fields %}
 						{{ field }}
 					{% endfor %}
@@ -52,13 +62,18 @@
 			<label for="">Websites</label>
 			{{ website_formset.management_form }}
 			{% for formset in website_formset.forms %}
-				<div class="formsetfieldwrap">
+				<div class="formsetfieldwrap website">
 					{% for field in formset.visible_fields %}
 						<div class="inlinefieldwrap">
 							{{ field.errors }}
 							{{ field }}
 						</div>
 					{% endfor %}
+					{% if not formset.instance.id = None %}
+						<div class="inlinefieldwrap">
+							<a class="button delete" href="{% url contacts.views.website_delete formset.instance.id %}"></a>
+						</div>
+					{% endif %}
 					{% for field in formset.hidden_fields %}
 						{{ field }}
 					{% endfor %}

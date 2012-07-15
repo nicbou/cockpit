@@ -25,10 +25,10 @@ class Contact(models.Model):
 	groups = models.ManyToManyField(Group,blank=True)
 	
 	def phonenumbers(self):
-		return PhoneNumber.objects.filter(Contact=self)
+		return PhoneNumber.objects.filter(contact=self)
 
 	def emailaddresses(self):
-		return EmailAddress.objects.filter(Contact=self)
+		return EmailAddress.objects.filter(contact=self)
 		
 	#Returns the full name. Borrowed from Django's User model
 	def get_full_name(self):
