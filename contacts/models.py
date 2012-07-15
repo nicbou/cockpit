@@ -38,7 +38,7 @@ class Contact(models.Model):
 
 #Phone number for a contact		
 class PhoneNumber(models.Model):
-	Contact = models.ForeignKey(Contact)
+	contact = models.ForeignKey(Contact)
 	number = models.CharField(max_length = 40)
 	HOME = 0
 	WORK = 1
@@ -61,7 +61,7 @@ class PhoneNumber(models.Model):
 	
 #Email for a contact		
 class EmailAddress(models.Model):
-	Contact = models.ForeignKey(Contact)
+	contact = models.ForeignKey(Contact)
 	email = models.CharField(max_length = 255)
 	PERSONAL = 0
 	WORK = 1
@@ -76,7 +76,7 @@ class EmailAddress(models.Model):
 
 #URLs for contacts
 class Website(models.Model):
-	Contact = models.ForeignKey(Contact)
+	contact = models.ForeignKey(Contact)
 	url = models.CharField('Website URL',max_length = 255)
 	WEBSITE = 0
 	SOCIAL = 1
