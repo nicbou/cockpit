@@ -39,7 +39,22 @@ def index (request):
 	})
 
 	
-def user_can_access(user,project_id):
+def user_can_access_company(user,company_id):
+	if user.is_anonymous():
+		return False
+		
+	try:
+		profile = user.get_profile()
+	except UserProfile.DoesNotExist:
+		profile = UserProfile.objects.create(user=user,company_id=company_id)
+		
+	if profile.company_id == company_id:
+		return True
+	else:
+		return False
+
+		
+def user_can_access_project(user,project_id):
 	if user.is_anonymous():
 		return False
 		
@@ -54,8 +69,8 @@ def user_can_access(user,project_id):
 		return True
 	else:
 		return False
-	
-	
+
+		
 def user_logout(request):
     logout(request)
     return redirect('/')
@@ -68,7 +83,7 @@ def project_single (request,project_id):
 	memos = Memo.objects.filter(project_id=project_id)
 	tasks = Task.objects.filter(project_id=project_id).exclude(status=Task.COMPLETED)
 	
-	if not user_can_access(request.user,project_id):
+	if not user_can_access_project(request.user,project_id):
 		return HttpResponse("You are not allowed to access this",status=403)
 
 	if request.POST:
@@ -135,7 +150,7 @@ def project_single (request,project_id):
 def document_delete(request,document_id):
 	document = get_object_or_404(Document,id=document_id)
 	project_id = document.project_id
-	if user_can_access(request.user,project_id):
+	if user_can_access_project(request.user,project_id):
 		document.file.delete()
 		document.delete()
 		return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#documents")
@@ -147,7 +162,7 @@ def document_single(request,document_id,key=""):
 	document = get_object_or_404(Document,id=document_id)
 	public_url = request.build_absolute_uri(reverse('document_public', args=[document.id,document.auth_key()]))
 	
-	if user_can_access(request.user,document.project_id) and key != document.auth_key():
+	if user_can_access_project(request.user,document.project_id) and key != document.auth_key():
 		if request.POST:
 			if 'email_form' in request.POST:
 				email_form = DocumentEmailForm(request.POST,document=document,user=request.user,public_url=public_url,prefix="email")
@@ -192,7 +207,7 @@ def document_single(request,document_id,key=""):
 def memo_delete(request,memo_id):
 	memo = get_object_or_404(Memo,id=memo_id)
 	project_id = memo.project_id
-	if user_can_access(request.user,project_id):
+	if user_can_access_project(request.user,project_id):
 		memo.delete()
 		return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#memos")
 	else:
@@ -202,7 +217,7 @@ def memo_delete(request,memo_id):
 @login_required()
 def project_delete(request,project_id):
 	project = get_object_or_404(Project,id=project_id)
-	if user_can_access(request.user,project.id):
+	if user_can_access_project(request.user,project.id):
 		project.delete()
 		return HttpResponseRedirect(reverse('home'))
 	else:
@@ -220,7 +235,7 @@ def task_status(request,task_id,task_status):
 @login_required
 def memo_edit(request,memo_id): #Returns or processes an AJAX form
 	memo = get_object_or_404(Memo,id=memo_id)
-	if user_can_access(request.user,memo.project_id):
+	if user_can_access_project(request.user,memo.project_id):
 		if not request.POST:
 			memo_form = MemoAddForm(instance=memo,prefix="memo")
 			return render(request,"memo_edit.html",{
