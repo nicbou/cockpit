@@ -3,7 +3,7 @@
 {% block title %}{{ contact.get_full_name }}{% endblock %}
 {% block subtitle %}{{ contact.title }}{% endblock %}
 {% block content %}
-	<form method="POST" action="">
+	<form method="POST" enctype="multipart/form-data" action="">
 		{% csrf_token %}
 		{% for field in contact_form.visible_fields %}
 			<div class="fieldwrap">

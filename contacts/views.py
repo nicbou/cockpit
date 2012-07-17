@@ -19,7 +19,7 @@ def contact_list(request):
 	
 	if request.POST:
 		contact = Contact()
-		contact_form = ContactAddForm(request.POST,instance=contact)
+		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(request.POST,prefix='phone',instance=contact)
 		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='address',instance=contact)
 		website_formset = WebsiteFormSet(request.POST,prefix='address',instance=contact)
@@ -60,7 +60,7 @@ def contact_single(request,contact_id):
 	WebsiteFormSet = inlineformset_factory(Contact, Website, can_delete=False)    
 	
 	if request.POST:
-		contact_form = ContactAddForm(request.POST,instance=contact)
+		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(request.POST,prefix='phone',instance=contact)
 		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='address',instance=contact)
 		website_formset = WebsiteFormSet(request.POST,prefix='website',instance=contact)
