@@ -87,6 +87,19 @@ def contact_single(request,contact_id):
 		'formset' : formset,
 	})
 
+@login_required()
+def contact_delete(request,document_id):
+	contact = get_object_or_404(Contact,id=document_id)
+	company_id = contact.company_id
+	if user_can_access_company(request.user,company_id):
+		contact.picture.delete()
+		contact.delete()
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('contact_list'))
+	else:
+		return HttpResponse("You are not allowed to access this",status=403)
 	
 @login_required()
 def phonenumber_delete(request,phonenumber_id):
