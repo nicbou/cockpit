@@ -48,5 +48,6 @@ urlpatterns = patterns('',
 	(r'^logout/$', 'projects.views.user_logout'),
 	
 	#Static files and documents
-	(r'^documents/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/var/www-python/cockpit/documents'}),
+	(r'^documents/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT + 'documents'}),
+	(r'^files/contact_pictures/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT + 'contact_pictures'}),
 	)
