@@ -16,6 +16,7 @@ a{text-decoration:none}
 #wrapper{width:900px;padding:0 30px 30px;margin:0 auto}
 	#header{color:#fff}
 		#header h1{margin:30px 0 0;font-size:40px;line-height:100%}
+		#contact-thumb{float:left;max-height:65px;margin:0 10px 0 0}
 		#header p{margin:0 0 30px}
 	#top-bar{border-radius:0 0 5px 5px;vertical-align:top;background:#779;height:45px;margin:0;padding:0;box-shadow:0 14px 10px -10px rgba(0, 0, 0, 0.3)}
 		#top-bar a{float:left;display:inline-block}
