@@ -2,8 +2,10 @@
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Title</th>			<th>Phone</th>
+			<th>Title</th>
+			<th>Phone</th>
 			<th>Email</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,10 +17,14 @@
 					{% for phone in contact.phonenumbers %}
 						<p><span class="type">{{ phone.get_type_display }}</span>{{ phone.number }}</p>
 					{% endfor %}
-				</td>				<td>
+				</td>
+				<td>
 					{% for email in contact.emailaddresses %}
 						<p><span class="type">{{ email.get_type_display }}</span>{{ email.email }}</p>
 					{% endfor %}
+				</td>
+				<td>
+					<a title="Delete this contact" class="contact-delete button delete" href="{% url contact_delete contact.id %}">&nbsp;</a>
 				</td>
 			</tr>
 		{% endfor %}

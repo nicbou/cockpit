@@ -31,14 +31,14 @@ $(document).ready(function(){
 	});
 	
 	//Comment delete
-	$('.comment-delete').click(function(e){
+	$('.comment-delete,.contact-delete').click(function(e){
 		e.preventDefault();
 		$.ajax({
 			context: this,
 			type: "GET",
 			url: $(this).attr('href'),
 			success: function(data){
-				$(this).parents('li').fadeOut(300);
+				$(this).parents('li,tr').slideUp({duration:300,queue:false}).fadeOut({duration:300,queue:false});
 			}
 		});
 	});

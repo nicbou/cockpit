@@ -114,10 +114,11 @@ a{text-decoration:none}
 		form h3{margin-top:0}
 		.fieldwrap,.formset{clear:both}
 			.fieldwrap label{}
-			.fieldwrap input,.fieldwrap select,.fieldwrap textarea{float:right;margin:0 0 15px;width:600px}
+			.fieldwrap input,.fieldwrap select,.fieldwrap textarea, .fieldwrap .button-big{float:right;margin:0 0 15px;width:600px}
 			.fieldwrap select{width:610px}
 			.fieldwrap textarea{height:60px}
 				#id_memo-content{height:200px}
+			.fieldwrap .button-big, .fieldwrap .submit{margin-left:10px}
 			.fieldwrap #id_message{height:140px}
 			.fieldwrap.hidden{display:none}
 			#ui-datepicker-div{display:none;background:#fff;padding:15px;box-shadow:2px 5px 15px rgba(0,0,0,0.3)}

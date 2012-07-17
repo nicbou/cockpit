@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 	#Contacts
 	url(r'^contacts$', 'contacts.views.contact_list', name='contact_list'),
 	url(r'^contacts/(\d+)$', 'contacts.views.contact_single', name='contact_single'),
-	#url(r'^contacts/delete/(\d+)$', 'contacts.views.phonenumber_delete', name='phonenumber_delete'),
+	url(r'^contacts/delete/(\d+)$', 'contacts.views.contact_delete', name='contact_delete'),
 	url(r'^contacts/delete_phonenumber/(\d+)$', 'contacts.views.phonenumber_delete', name='phonenumber_delete'),
 	url(r'^contacts/delete_emailaddress/(\d+)$', 'contacts.views.emailaddress_delete', name='emailaddress_delete'),
 	url(r'^contacts/delete_website/(\d+)$', 'contacts.views.website_delete', name='website_delete'),
