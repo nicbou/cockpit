@@ -1,7 +1,8 @@
 from django.db import models
 from projects.models import *
 from django.forms.models import inlineformset_factory
-
+from PIL import Image
+import os
 
 #Similar to Django's groups, but without the bloat
 class Group(Descriptible):
@@ -34,6 +35,19 @@ class Contact(models.Model):
 	def get_full_name(self):
 		full_name = '%s %s' % (self.first_name, self.last_name)
 		return full_name.strip()
+
+	def picture_thumbnail_url(self,width='65',height='65'):
+		file = self.picture.name
+		basename, format = file.rsplit('.', 1)
+		miniature = basename + '_' + width + 'x' + height + '.' +  format
+		miniature_filename = settings.MEDIA_ROOT + miniature
+		miniature_url = os.path.join(settings.MEDIA_URL, miniature)
+		if not os.path.exists(miniature_filename):
+			filename = settings.MEDIA_ROOT + self.picture.name
+			image = Image.open(filename)
+			image.thumbnail([width, height])
+			image.save(miniature_filename, image.format)
+		return miniature_url
 
 
 #Phone number for a contact		
