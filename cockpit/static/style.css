@@ -86,7 +86,9 @@ a{text-decoration:none}
 				.share{background:url('/static/share.png')}
 			
 			.contact-list{}
-				.type{color:#999;display:inline-block;min-width:55px;margin:0 5px 0 0}
+				.contact-list .name{max-width:200px}
+					.contact-list .title{color:#999;font-size:80%;line-height:120%}
+				.contact-list .type{color:#999;display:inline-block;min-width:65px;margin:0 5px 0 0}
 				
 			.button-big, .submit{padding:10px 15px!important;border:none!important;width:auto!important;height:auto;background:#55a;display:inline-block;color:#fff;cursor:pointer;border-radius:5px}
 			.button-big:hover,.submit:hover{background:#77b}
@@ -135,6 +137,7 @@ a{text-decoration:none}
 			.formsetfieldwrap{float:right;margin:0 0 15px;width:613px}
 			.inlinefieldwrap{float:left}
 			.inlinefieldwrap label{display:block}
+				.inlinefieldwrap .delete{margin:4px 0 0 5px}
 		.submit{float:right;cursor:pointer}
 		
 	.floatfix{clear:both}

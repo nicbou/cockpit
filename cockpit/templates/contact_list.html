@@ -2,7 +2,6 @@
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Title</th>
 			<th>Phone</th>
 			<th>Email</th>
 			<th>Actions</th>
@@ -11,8 +10,10 @@
 	<tbody>
 		{% for contact in contacts %}
 			<tr>
-				<td class="title"><a href="{% url contacts.views.contact_single contact.id %}">{{ contact.get_full_name }}</a></td>
-				<td>{{ contact.title }}</td>
+				<td class="name">
+					<a href="{% url contacts.views.contact_single contact.id %}">{{ contact.get_full_name }}</a><br/>
+					<div class="title">{{ contact.title }}</div>
+				</td>
 				<td>
 					{% for phone in contact.phonenumbers %}
 						<p><span class="type">{{ phone.get_type_display }}</span>{{ phone.number }}</p>
