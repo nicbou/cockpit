@@ -13,14 +13,7 @@
 		<h2 class="floatfix">Projects</h2>
 		{% include "project_list.html" %}
 		<form method="POST" enctype="multipart/form-data" action="">
-			<h3>Start a new project</h3>
-			{% csrf_token %}
-			{% for field in project_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=project_form title="Start a new project" %}
 			<div class="fieldwrap">
 				<input name="project_form" class="submit" type="submit" />
 			</div>

@@ -6,15 +6,7 @@
 {% block subtitle %}Bring changes to an existing memo{% endblock %}
 {% block content %}
 	<form class="memo_form" method="POST" action="#overview">
-		{% csrf_token %}
-		{% for field in memo_form %}
-			<div class="fieldwrap">
-				{{ field.errors }}
-				{{ field }}
-				{{ field.label_tag }}<br/>
-				{% if field.help_text %}<span class="help-text">{{ field.help_text }}</span>{% endif %}
-			</div>
-		{% endfor %}
+		{% include "base_forms/form_fields.html" with form=memo_form %}
 		<div class="fieldwrap">
 			<input name="memo_form" class="submit" type="submit" value="Save changes and return"/>
 		</div>
