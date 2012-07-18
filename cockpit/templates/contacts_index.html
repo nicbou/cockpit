@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block breadcrumbs %}Contacts{% endblock %}
+{% block title %}Contacts{% endblock %}
+{% block subtitle %}All your contacts{% endblock %}
+{% block content %}
+	{% include "contact_list.html" %}
+	<form method="POST" enctype="multipart/form-data" action="">
+		<h3>Create a new contact</h3>
+		{% csrf_token %}
+		{% for field in contact_form.visible_fields %}
+			<div class="fieldwrap">
+				{{ field.errors }}
+				{{ field.label_tag }}{{ field }}
+			</div>
+		{% endfor %}
+		
+		<div class="formset">
+			<label for="">Phone numbers</label>
+			{{ phonenumber_formset.management_form }}
+			{% for formset in phonenumber_formset.forms %}
+				<div class="formsetfieldwrap">
+					{% for field in formset.visible_fields %}
+						<div class="inlinefieldwrap">
+							{{ field.errors }}
+							{{ field }}
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+		
+		<div class="formset">
+			<label for="">Email addresses</label>
+			{{ emailaddress_formset.management_form }}
+			{% for formset in emailaddress_formset.forms %}
+				<div class="formsetfieldwrap">
+					{% for field in formset.visible_fields %}
+						<div class="inlinefieldwrap">
+							{{ field.errors }}
+							{{ field }}
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+		
+		<div class="formset">
+			<label for="">Websites</label>
+			{{ website_formset.management_form }}
+			{% for formset in website_formset.forms %}
+				<div class="formsetfieldwrap">
+					{% for field in formset.visible_fields %}
+						<div class="inlinefieldwrap">
+							{{ field.errors }}
+							{{ field }}
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+		
+		<div class="fieldwrap">
+			<input name="contact_form" class="submit" type="submit" value="Add contact"/>
+		</div>
+		<div class="floatfix"></div>
+	</form>
+{% endblock %}

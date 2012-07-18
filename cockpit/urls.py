@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-	#Models
+	#Projects
 	url(r'^$', 'projects.views.index', name='home'),
 	url(r'^comments/delete/(\d+)$', 'projects.views.comment_delete', name='comment_delete'), 
 	url(r'^documents/(\d+)$', 'projects.views.document_single', name='document_single'),
@@ -25,6 +25,14 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 	(r'^comments/', include('django.contrib.comments.urls')),
 	
+	#Contacts
+	url(r'^contacts$', 'contacts.views.contact_list', name='contact_list'),
+	url(r'^contacts/(\d+)$', 'contacts.views.contact_single', name='contact_single'),
+	url(r'^contacts/delete/(\d+)$', 'contacts.views.contact_delete', name='contact_delete'),
+	url(r'^contacts/delete_phonenumber/(\d+)$', 'contacts.views.phonenumber_delete', name='phonenumber_delete'),
+	url(r'^contacts/delete_emailaddress/(\d+)$', 'contacts.views.emailaddress_delete', name='emailaddress_delete'),
+	url(r'^contacts/delete_website/(\d+)$', 'contacts.views.website_delete', name='website_delete'),
+	
 	#User profile
 	(r'^profile/$', 'accounts.views.user_profile'),
 	
@@ -40,5 +48,6 @@ urlpatterns = patterns('',
 	(r'^logout/$', 'projects.views.user_logout'),
 	
 	#Static files and documents
-	(r'^documents/(?P<path>.*)$', 'django.views.static.serve',{'document_root': '/var/www-python/cockpit/documents'}),
+	(r'^documents/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT + 'documents'}),
+	(r'^files/contact_pictures/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT + 'contact_pictures'}),
 	)

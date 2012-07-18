@@ -78,7 +78,7 @@ class Document (Descriptible):
 		
 	def mimetype(self):
 		m = magic.Magic(mime=True)
-		return m.from_file(self.file.name)
+		return m.from_file(settings.MEDIA_ROOT + self.file.name)
 		
 	def content(self):
 		return self.file.read()

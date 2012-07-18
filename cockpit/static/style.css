@@ -15,16 +15,21 @@ a{text-decoration:none}
 
 #wrapper{width:900px;padding:0 30px 30px;margin:0 auto}
 	#header{color:#fff}
-		#header h1{margin:20px 0 0;font-size:40px;line-height:100%}
+		#header h1{margin:30px 0 0;font-size:40px;line-height:100%}
+		#contact-thumb{float:left;max-height:65px;margin:0 10px 0 0}
 		#header p{margin:0 0 30px}
-	#breadcrumbs,#user_menu{color:#aab}
-		#breadcrumbs a,#user_menu a{color:#ccf}
-		#breadcrumbs a:hover,#user_menu a:hover{color:#f60}
-	#user_menu{float:right;margin:20px 0 0}
+	#top-bar{border-radius:0 0 5px 5px;vertical-align:top;background:#779;height:45px;margin:0;padding:0;box-shadow:0 14px 10px -10px rgba(0, 0, 0, 0.3)}
+		#top-bar a{float:left;display:inline-block}
+		#top-bar a:first-child{border-left:0!important}
+		#top-bar a:last-child{border-right:0!important}
+		#home-icon{background:url('home-icon.png') no-repeat center!important;width:10px;height:45px}
+		#user-menu{float:right;color:#aab}
+		#user-menu a{color:#ccf}
 	.ui-tabs-hide{display:none!important}
 		.ui-tabs-nav{margin:0;padding:0;height:46px}
 			.ui-tabs-nav li{float:left;list-style:none;margin:0;padding:0}
-				.ui-tabs-nav li a{text-shadow:0 -1px 0 #556;display:block;border-right:1px solid #667;border-top:1px solid #889;border-left:1px solid #889;padding:0 20px;line-height:45px;color:#fff;background:#779}
+				.ui-tabs-nav li a,#top-bar a{text-shadow:0 -1px 0 #556;display:inline-block;border-right:1px solid #667;border-left:1px solid #889;padding:0 20px;line-height:45px;color:#fff}
+				.ui-tabs-nav li a{background:#779;border-top:1px solid #889}
 				.ui-tabs-nav .ui-state-active a{text-shadow:none;border:0;border-top:1px solid #fff;color:#000;background:#fff;cursor:text}
 				.ui-tabs-nav li:first-child a{border-radius:5px 0 0 0}
 				.ui-tabs-nav li:last-child a{border-radius:0 5px 0 0}
@@ -54,6 +59,7 @@ a{text-decoration:none}
 			th:last-child,td:last-child{padding-right:10px}
 			tr:nth-child(even) td{background:#eee}
 			tr:nth-child(odd) td{background:#f6f6f6}
+			td p{margin:0}
 		td{border-top:1px solid #fff;border-bottom:1px solid #ddd}
 			.status,.document-list .actions{max-width:111px;width:111px}
 				.status a,.button{display:inline-block;float:left;width:24px;height:24px;opacity:0.1}
@@ -70,7 +76,6 @@ a{text-decoration:none}
 			.memo-list .actions{max-width:63px;width:63px}
 				.memo-date{color:#999;font-size:80%}
 				.memo-content{padding-left:10px;padding-right:10px}
-					.memo-content p{margin:0}
 					.memo-content ul{margin:0;padding:0}
 					.memo-content li{margin:0 0 0 20px;list-style:outside square;padding:0}
 			.delete,.download,.share,.comments,.edit{opacity:0.5}
@@ -79,6 +84,11 @@ a{text-decoration:none}
 				.download{background:url('/static/download.png')}
 				.comments{background:url('/static/comment.png');text-align:center;font-size:11px;color:#55a}
 				.share{background:url('/static/share.png')}
+			
+			.contact-list{}
+				.contact-list .name{max-width:200px}
+					.contact-list .title{color:#999;font-size:80%;line-height:120%}
+				.contact-list .type{color:#999;display:inline-block;min-width:65px;margin:0 5px 0 0}
 				
 			.button-big, .submit{padding:10px 15px!important;border:none!important;width:auto!important;height:auto;background:#55a;display:inline-block;color:#fff;cursor:pointer;border-radius:5px}
 			.button-big:hover,.submit:hover{background:#77b}
@@ -104,12 +114,13 @@ a{text-decoration:none}
 			input,.edit_form table input:focus,textarea,.edit_form textarea:focus,select{padding:4px;border:1px solid #999;background:#fff}
 			.edit_form textarea:focus{height:60px}
 		form h3{margin-top:0}
-		.fieldwrap{clear:both}
+		.fieldwrap,.formset{clear:both}
 			.fieldwrap label{}
-			.fieldwrap input, .fieldwrap select, .fieldwrap textarea{float:right;margin:0 0 15px;width:600px}
+			.fieldwrap input,.fieldwrap select,.fieldwrap textarea, .fieldwrap .button-big{float:right;margin:0 0 15px;width:600px}
 			.fieldwrap select{width:610px}
 			.fieldwrap textarea{height:60px}
 				#id_memo-content{height:200px}
+			.fieldwrap .button-big, .fieldwrap .submit{margin-left:10px}
 			.fieldwrap #id_message{height:140px}
 			.fieldwrap.hidden{display:none}
 			#ui-datepicker-div{display:none;background:#fff;padding:15px;box-shadow:2px 5px 15px rgba(0,0,0,0.3)}
@@ -120,6 +131,13 @@ a{text-decoration:none}
 				.ui-datepicker-title{text-align:center;padding:5px 0;margin:0 0 15px}
 				.ui-datepicker-calendar{table-layout:fixed;width:230px}
 					.ui-datepicker-calendar td{text-align:center}
+		.formset{padding-top:15px;border-top:1px solid #ddd}
+			.formset input[type=text]{width:200px}
+			.formset select{min-width:130px}
+			.formsetfieldwrap{float:right;margin:0 0 15px;width:613px}
+			.inlinefieldwrap{float:left}
+			.inlinefieldwrap label{display:block}
+				.inlinefieldwrap .delete{margin:4px 0 0 5px}
 		.submit{float:right;cursor:pointer}
 		
 	.floatfix{clear:both}
