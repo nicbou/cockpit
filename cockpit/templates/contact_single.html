@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block breadcrumbs %}Contacts > {{ contact.get_full_name }}{% endblock %}
-{% block title %}<img id="contact-thumb" src="{{ contact.picture_thumbnail_url }}" />{{ contact.get_full_name }}{% endblock %}
+{% block title %}
+	{% if contact.picture_thumbnail_url %}
+		<img id="contact-thumb" src="{{ contact.picture_thumbnail_url }}" />
+	{% endif %}
+	{{ contact.get_full_name }}
+{% endblock %}
 {% block subtitle %}{{ contact.title }}{% endblock %}
 {% block content %}
 	<form method="POST" enctype="multipart/form-data" action="">
