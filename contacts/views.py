@@ -55,9 +55,9 @@ def contact_single(request,contact_id):
 	if not user_can_access_company(request.user,contact.company_id):
 		return HttpResponse("You are not allowed to access this",status=403)
 	
-	PhoneNumberFormSet = inlineformset_factory(Contact, PhoneNumber, can_delete=False)
-	EmailAddressFormSet = inlineformset_factory(Contact, EmailAddress, can_delete=False)    
-	WebsiteFormSet = inlineformset_factory(Contact, Website, can_delete=False)    
+	PhoneNumberFormSet = inlineformset_factory(Contact, PhoneNumber, can_delete=True)
+	EmailAddressFormSet = inlineformset_factory(Contact, EmailAddress, can_delete=True)    
+	WebsiteFormSet = inlineformset_factory(Contact, Website, can_delete=True)    
 	
 	if request.POST:
 		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)

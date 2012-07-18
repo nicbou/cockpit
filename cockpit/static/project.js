@@ -45,16 +45,29 @@ $(document).ready(function(){
 	
 
 	//Contact info delete
-	$('.phonenumber .delete,.emailaddress .delete,.website .delete').click(function(e){
+	$('.phonenumber .delete').click(function(e){
 		e.preventDefault();
-		$.ajax({
-			context: this,
-			type: "GET",
-			url: $(this).attr('href'),
-			success: function(data){
-				$(this).parents('.formsetfieldwrap').slideUp({duration:300,queue:false}).fadeOut({duration:300,queue:false});
-			}
-		});
+		delete_formset_item('phone',$(this));
 	});
+
+	$('.emailaddress .delete').click(function(e){
+		e.preventDefault();
+		delete_formset_item('email',$(this));
+	});
+
+	$('.website .delete').click(function(e){
+		e.preventDefault();
+		delete_formset_item('website',$(this));
+	});
+
+	//Removes an item from a formset, submits the AJAX deletion request AND removes it from the formset count
+	function delete_formset_item(prefix,element){
+		parentForm = element.parents('.formsetfieldwrap');
+		//Set the "id_...-DELETE" <input> tag to true. This input replaces Django's delete checkbox.
+		parentForm.find('input:hidden[id $= "-DELETE"]').val('on');
+		//Make the deletion visible
+		parentForm.fadeTo(300,0.3);
+		element.fadeOut(300,0);
+	}
 	
 });

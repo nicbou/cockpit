@@ -23,12 +23,14 @@
 			{% for formset in phonenumber_formset.forms %}
 				<div class="formsetfieldwrap phonenumber">
 					{% for field in formset.visible_fields %}
-						<div class="inlinefieldwrap">
-							{{ field.errors }}
-							{{ field }}
-						</div>
+						{% if not field.name = formset.DELETE.name %}
+							<div class="inlinefieldwrap">
+								{{ field.errors }}
+								{{ field }}
+							</div>
+						{% endif %}
 					{% endfor %}
-					{% if not formset.instance.id = None %}
+					{% if not formset.instance.id = None and phonenumber_formset.can_delete %}
 						<div class="inlinefieldwrap">
 							<a class="button delete" href="{% url contacts.views.phonenumber_delete formset.instance.id %}"></a>
 						</div>
@@ -36,29 +38,33 @@
 					{% for field in formset.hidden_fields %}
 						{{ field }}
 					{% endfor %}
+					<input type="hidden" name="{{formset.DELETE.html_name}}" id="{{formset.DELETE.auto_id}}"/>
 				</div>
 			{% endfor %}
 		</div>
 		
 		<div class="formset">
-			<label for="">Websites</label>
+			<label for="">Email addresses</label>
 			{{ emailaddress_formset.management_form }}
 			{% for formset in emailaddress_formset.forms %}
 				<div class="formsetfieldwrap emailaddress">
 					{% for field in formset.visible_fields %}
-						<div class="inlinefieldwrap">
-							{{ field.errors }}
-							{{ field }}
-						</div>
+						{% if not field.name = formset.DELETE.name %}
+							<div class="inlinefieldwrap">
+								{{ field.errors }}
+								{{ field }}
+							</div>
+						{% endif %}
 					{% endfor %}
-					{% if not formset.instance.id = None %}
+					{% if not formset.instance.id = None and emailaddress_formset.can_delete %}
 						<div class="inlinefieldwrap">
 							<a class="button delete" href="{% url contacts.views.emailaddress_delete formset.instance.id %}"></a>
 						</div>
-					{% endif %}			
+					{% endif %}
 					{% for field in formset.hidden_fields %}
 						{{ field }}
 					{% endfor %}
+					<input type="hidden" name="{{formset.DELETE.html_name}}" id="{{formset.DELETE.auto_id}}"/>
 				</div>
 			{% endfor %}
 		</div>
@@ -69,12 +75,14 @@
 			{% for formset in website_formset.forms %}
 				<div class="formsetfieldwrap website">
 					{% for field in formset.visible_fields %}
-						<div class="inlinefieldwrap">
-							{{ field.errors }}
-							{{ field }}
-						</div>
+						{% if not field.name = formset.DELETE.name %}
+							<div class="inlinefieldwrap">
+								{{ field.errors }}
+								{{ field }}
+							</div>
+						{% endif %}
 					{% endfor %}
-					{% if not formset.instance.id = None %}
+					{% if not formset.instance.id = None and website_formset.can_delete %}
 						<div class="inlinefieldwrap">
 							<a class="button delete" href="{% url contacts.views.website_delete formset.instance.id %}"></a>
 						</div>
@@ -82,6 +90,7 @@
 					{% for field in formset.hidden_fields %}
 						{{ field }}
 					{% endfor %}
+					<input type="hidden" name="{{formset.DELETE.html_name}}" id="{{formset.DELETE.auto_id}}"/>
 				</div>
 			{% endfor %}
 		</div>
