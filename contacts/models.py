@@ -3,10 +3,6 @@ from projects.models import *
 from django.forms.models import inlineformset_factory
 from PIL import Image
 import os
-
-#Similar to Django's groups, but without the bloat
-class Group(Descriptible):
-	company = models.ForeignKey(Company) #The company who created this Contact, not the company this Contact works for
 	
 	
 class Contact(models.Model):
@@ -19,11 +15,9 @@ class Contact(models.Model):
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30, blank=True)
 	title = models.CharField(max_length=255, blank=True)
-	picture = models.ImageField(upload_to='contact_pictures', blank=True)
+	picture = models.ImageField(upload_to='contact_pictures',blank=True)
 	
 	notes = models.TextField(blank=True)
-	
-	groups = models.ManyToManyField(Group,blank=True)
 	
 	def phonenumbers(self):
 		return PhoneNumber.objects.filter(contact=self)
