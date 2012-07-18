@@ -21,8 +21,8 @@ def contact_list(request):
 		contact = Contact()
 		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(request.POST,prefix='phone',instance=contact)
-		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='address',instance=contact)
-		website_formset = WebsiteFormSet(request.POST,prefix='address',instance=contact)
+		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='email',instance=contact)
+		website_formset = WebsiteFormSet(request.POST,prefix='website',instance=contact)
 
 		if contact_form.is_valid() and phonenumber_formset.is_valid() and emailaddress_formset.is_valid() and website_formset.is_valid():
 			new_contact = contact_form.save(commit=False)
@@ -35,8 +35,8 @@ def contact_list(request):
 	else:
 		contact_form = ContactAddForm()
 		phonenumber_formset = PhoneNumberFormSet(prefix='phone')
-		emailaddress_formset = EmailAddressFormSet(prefix='address')
-		website_formset = WebsiteFormSet(prefix='address')
+		emailaddress_formset = EmailAddressFormSet(prefix='email')
+		website_formset = WebsiteFormSet(prefix='website')
 	
 	formset = PhoneNumberFormSet()
 	return render(request,"contacts_index.html",{
@@ -62,7 +62,7 @@ def contact_single(request,contact_id):
 	if request.POST:
 		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(request.POST,prefix='phone',instance=contact)
-		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='address',instance=contact)
+		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='email',instance=contact)
 		website_formset = WebsiteFormSet(request.POST,prefix='website',instance=contact)
 
 		if contact_form.is_valid() and phonenumber_formset.is_valid() and emailaddress_formset.is_valid() and website_formset.is_valid():
@@ -74,7 +74,7 @@ def contact_single(request,contact_id):
 	else:
 		contact_form = ContactAddForm(instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(instance=contact,prefix='phone')
-		emailaddress_formset = EmailAddressFormSet(instance=contact,prefix='address')
+		emailaddress_formset = EmailAddressFormSet(instance=contact,prefix='email')
 		website_formset = WebsiteFormSet(instance=contact,prefix='website')
 	
 	formset = PhoneNumberFormSet()
