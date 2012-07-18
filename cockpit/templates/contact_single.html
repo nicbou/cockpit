@@ -9,91 +9,11 @@
 {% block subtitle %}{{ contact.title|default:'&nbsp;' }}{% endblock %}
 {% block content %}
 	<form method="POST" enctype="multipart/form-data" action="">
-		{% csrf_token %}
-		{% for field in contact_form.visible_fields %}
-			<div class="fieldwrap">
-				{{ field.errors }}
-				{{ field.label_tag }}{{ field }}
-			</div>
-		{% endfor %}
+		{% include "base_forms/form_fields.html" with form=contact_form %}
 		
-		<div class="formset">
-			<label for="">Phone numbers</label>
-			{{ phonenumber_formset.management_form }}
-			{% for formset in phonenumber_formset.forms %}
-				<div class="formsetfieldwrap phonenumber">
-					{% for field in formset.visible_fields %}
-						{% if not field.name = formset.DELETE.name %}
-							<div class="inlinefieldwrap">
-								{{ field.errors }}
-								{{ field }}
-							</div>
-						{% endif %}
-					{% endfor %}
-					{% if not formset.instance.id = None and phonenumber_formset.can_delete %}
-						<div class="inlinefieldwrap">
-							<a class="button delete" href="{% url contacts.views.phonenumber_delete formset.instance.id %}"></a>
-						</div>
-					{% endif %}
-					{% for field in formset.hidden_fields %}
-						{{ field }}
-					{% endfor %}
-					<input type="hidden" name="{{formset.DELETE.html_name}}" id="{{formset.DELETE.auto_id}}"/>
-				</div>
-			{% endfor %}
-		</div>
-		
-		<div class="formset">
-			<label for="">Email addresses</label>
-			{{ emailaddress_formset.management_form }}
-			{% for formset in emailaddress_formset.forms %}
-				<div class="formsetfieldwrap emailaddress">
-					{% for field in formset.visible_fields %}
-						{% if not field.name = formset.DELETE.name %}
-							<div class="inlinefieldwrap">
-								{{ field.errors }}
-								{{ field }}
-							</div>
-						{% endif %}
-					{% endfor %}
-					{% if not formset.instance.id = None and emailaddress_formset.can_delete %}
-						<div class="inlinefieldwrap">
-							<a class="button delete" href="{% url contacts.views.emailaddress_delete formset.instance.id %}"></a>
-						</div>
-					{% endif %}
-					{% for field in formset.hidden_fields %}
-						{{ field }}
-					{% endfor %}
-					<input type="hidden" name="{{formset.DELETE.html_name}}" id="{{formset.DELETE.auto_id}}"/>
-				</div>
-			{% endfor %}
-		</div>
-		
-		<div class="formset">
-			<label for="">Websites</label>
-			{{ website_formset.management_form }}
-			{% for formset in website_formset.forms %}
-				<div class="formsetfieldwrap website">
-					{% for field in formset.visible_fields %}
-						{% if not field.name = formset.DELETE.name %}
-							<div class="inlinefieldwrap">
-								{{ field.errors }}
-								{{ field }}
-							</div>
-						{% endif %}
-					{% endfor %}
-					{% if not formset.instance.id = None and website_formset.can_delete %}
-						<div class="inlinefieldwrap">
-							<a class="button delete" href="{% url contacts.views.website_delete formset.instance.id %}"></a>
-						</div>
-					{% endif %}
-					{% for field in formset.hidden_fields %}
-						{{ field }}
-					{% endfor %}
-					<input type="hidden" name="{{formset.DELETE.html_name}}" id="{{formset.DELETE.auto_id}}"/>
-				</div>
-			{% endfor %}
-		</div>
+		{% include "base_forms/inline_formset.html" with label="Phone numbers" delete_view='phonenumber_delete' formset=phonenumber_formset %}
+		{% include "base_forms/inline_formset.html" with label="Email addresses" delete_view='emailaddress_delete' formset=emailaddress_formset %}
+		{% include "base_forms/inline_formset.html" with label="Websites" delete_view='website_delete' formset=website_formset %}
 		
 		<div class="fieldwrap">
 			<a href="{% url contact_delete contact.id %}" class="button-big delete-big" title="Delete this contact">Delete this contact</a>
