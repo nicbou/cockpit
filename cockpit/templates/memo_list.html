@@ -4,7 +4,10 @@
 		<tr>
 			<th>Title</th>
 			<th>Message</th>
-			<th>Actions</th>
+			{% if show_project %}
+				<th>Project</th>
+			{% endif %}	
+			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,6 +18,11 @@
 					<span class="memo-date">{{ memo.date_modified.date }}</span>
 				</td>
 				<td class="memo-content">{{ memo.content|markdown:"nl2br" }}</td>
+				{% if show_project %}
+					<td>
+						<a href="{% url project_single memo.project_id %}">{{ memo.project.title }}</a>
+					</td>
+				{% endif %}
 				<td class="actions">
 					<a class="button edit" href="{% url projects.views.memo_edit memo.id %}">&nbsp;</a>
 					<a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a>

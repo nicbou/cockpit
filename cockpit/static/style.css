@@ -61,7 +61,7 @@ a{text-decoration:none}
 			tr:nth-child(odd) td{background:#f6f6f6}
 			td p{margin:0}
 		td{border-top:1px solid #fff;border-bottom:1px solid #ddd}
-			.status,.document-list .actions{max-width:111px;width:111px}
+			.status,.document-list .actions,.contact-list .actions{max-width:96px;width:96px}
 				.status a,.button{display:inline-block;float:left;width:24px;height:24px;opacity:0.1}
 				.status span{width:5px;display:inline-block}
 					.status a:hover,.current,.button:hover{opacity:1!important}
@@ -73,7 +73,7 @@ a{text-decoration:none}
 					.status .completed{background:url('/static/task-completed.png')}
 				.status-1 td,.status-0 td{color:#999}
 				.status-1 a,.status-0 a{color:#999}
-			.memo-list .actions{max-width:63px;width:63px}
+			.memo-list .actions{max-width:48px;width:48px}
 				.memo-date{color:#999;font-size:80%}
 				.memo-content{padding-left:10px;padding-right:10px}
 					.memo-content ul{margin:0;padding:0}
@@ -86,6 +86,7 @@ a{text-decoration:none}
 				.share{background:url('/static/share.png')}
 			
 			.contact-list{}
+				.contact-list .actions{max-width:24px;width:24px}
 				.contact-list .name{max-width:200px}
 					.contact-list .title{color:#999;font-size:80%;line-height:120%}
 				.contact-list .type{color:#999;display:inline-block;min-width:65px;margin:0 5px 0 0}
