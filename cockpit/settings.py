@@ -25,10 +25,12 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'America/Montreal'
+DATE_INPUT_FORMATS = ('%y-%m-%d',)
+DATE_OUTPUT_FORMAT = '%y-%m-%d' 
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'fr-ca'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
