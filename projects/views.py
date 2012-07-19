@@ -10,12 +10,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import comments
 from itertools import chain
+from cockpit.profiler import profile
 import operator
 
 
 @login_required()
 def index (request):
-	company_id = request.user.get_profile().company.id
+	company_id = request.user.get_profile().company_id
 	project_form = ProjectAddForm(prefix="project")
 	if request.POST:
 		project_form = ProjectAddForm(request.POST,prefix="project")
@@ -64,8 +65,7 @@ def user_can_access_project(user,project_id):
 		profile = user.get_profile()
 	except UserProfile.DoesNotExist:
 		profile = UserProfile.objects.create(user=user,company=project.company)
-	company = get_object_or_404(Company,id=profile.company_id)
-	if project.company_id == company.id:
+	if project.company_id == profile.company_id:
 		return True
 	else:
 		return False
@@ -75,7 +75,6 @@ def user_logout(request):
     logout(request)
     return redirect('/')
 
-    
 @login_required()	
 def project_single (request,project_id):
 	project = get_object_or_404(Project,id=project_id)
@@ -217,7 +216,7 @@ def memo_delete(request,memo_id):
 @login_required()
 def project_delete(request,project_id):
 	project = get_object_or_404(Project,id=project_id)
-	if user_can_access_project(request.user,project.id):
+	if user_can_access_project(request.user,project_id):
 		project.delete()
 		return HttpResponseRedirect(reverse('home'))
 	else:
@@ -261,7 +260,7 @@ def memo_edit(request,memo_id): #Returns or processes an AJAX form
 		
 @login_required()
 def task_list(request,project_id=None):
-	company_id = request.user.get_profile().company.id
+	company_id = request.user.get_profile().company_id
 	if not project_id == None:
 		tasks = Task.objects.filter(project = project_id).exclude(status = 0)
 		project = get_object_or_404(Project,id=project_id)
@@ -277,7 +276,7 @@ def task_list(request,project_id=None):
 	
 @login_required()
 def task_all(request,project_id=None):
-	company_id = request.user.get_profile().company.id
+	company_id = request.user.get_profile().company_id
 	if not project_id == None:
 		tasks = Task.objects.filter(project = project_id).exclude(status = 0)
 		project = get_object_or_404(Project,id=project_id)
