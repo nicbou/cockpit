@@ -15,7 +15,7 @@
 			<tr>
 				<td class="title">
 					{{ memo.title }}<br/>
-					<span class="memo-date">{{ memo.date_modified.date }}</span>
+					<span class="memo-date">{{ memo.date_modified.date|date|default:"None" }}</span>
 				</td>
 				<td class="memo-content">{{ memo.content|markdown:"nl2br" }}</td>
 				{% if show_project %}

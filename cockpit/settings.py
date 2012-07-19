@@ -26,7 +26,8 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 # system time zone.
 TIME_ZONE = 'America/Montreal'
 DATE_INPUT_FORMATS = ('%y-%m-%d',)
-DATE_OUTPUT_FORMAT = '%y-%m-%d' 
+DATE_OUTPUT_FORMAT = '%y-%m-%d'
+DATE_FORMAT = 'N j' 
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
