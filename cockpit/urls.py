@@ -2,9 +2,6 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.contrib import admin
-admin.autodiscover()
-
 urlpatterns = patterns('',
 
 	#Projects
@@ -22,7 +19,6 @@ urlpatterns = patterns('',
 	url(r'^tasks$', 'projects.views.task_all', name='task_all'),
 	url(r'^projects/(\d+)/tasks$', 'projects.views.task_all'),
 	url(r'^tasks/(\d+)/(\d+)$', 'projects.views.task_status', name='task_status'),
-	url(r'^admin/', include(admin.site.urls)),
 	(r'^comments/', include('django.contrib.comments.urls')),
 	
 	#Contacts
