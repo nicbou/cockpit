@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block breadcrumbs %}
-	<a href="{% url projects.views.index %}">Projects</a> » <a href="/projects/{{ memo.project_id }}">{{ memo.project.title }}</a> » <a href="/projects/{{ memo.project_id }}#memos">Memos</a> » {{ memo.title }}		
+{% block html_title %}
+	{{ memo.title }} | Memos | {{ block.super }}	
 {% endblock %}
 {% block title %}Edit {{ memo.title }}{% endblock %}
 {% block subtitle %}Bring changes to an existing memo{% endblock %}

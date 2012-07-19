@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% block breadcrumbs %}Contacts{% endblock %}
+{% block html_title %}
+	Contacts | {{ block.super }}
+{% endblock %}
 {% block title %}Contacts{% endblock %}
 {% block subtitle %}All your contacts{% endblock %}
 {% block content %}

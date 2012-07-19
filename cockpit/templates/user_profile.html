@@ -1,6 +1,6 @@
 {% extends "base_tabs.html" %}
-{% block breadcrumbs %}
-	Account » User profile
+{% block html_title %}
+	Profile | {{ block.super }}	
 {% endblock %}
 {% block title %}{{ user.first_name }}'s profile{% endblock %}
 {% block subtitle %}View and edit your user profile{% endblock %}

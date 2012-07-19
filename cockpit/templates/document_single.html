@@ -1,11 +1,10 @@
 {% extends "base_tabs.html" %}
 {% load comments %}
-
-{% block breadcrumbs %}
+{% block html_title %}
 	{% if is_public %}
-		{{ document.project.company.name }} » {{ document.project.title }} » Public documents » {{ document.title }}
+		{{ document.title }} | {{ block.super }}
 	{% else %}
-		<a href="{% url projects.views.index %}">Projects</a> » <a href="/projects/{{ document.project_id }}">{{ document.project.title }}</a> » <a href="/projects/{{ document.project_id }}#documents">Documents</a> » {{ document.title }}		
+		{{ document.title }} | Documents | {{ block.super }}
 	{% endif %}
 {% endblock %}
 {% block account %}{% if not user.is_anonymous %}{{ block.super }}{% else %}{% endif %}{% endblock %}

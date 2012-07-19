@@ -1,5 +1,7 @@
 {% extends "base_tabs.html" %}
-{% block breadcrumbs %}<a href="{% url projects.views.index %}">Projects</a> » {{ project.title }}{% endblock %}
+{% block html_title %}
+	{{ project.title }} | Projects | {{ block.super }}
+{% endblock %}
 {% block title %}{{ project.title }}{% endblock %}
 {% block subtitle %}{{ project.description }}{% endblock %}
 {% block content %}
