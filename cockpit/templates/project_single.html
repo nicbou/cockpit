@@ -80,7 +80,7 @@
 		<h2>Documents</h2>
 		{% include "document_list.html" %}
 		<form method="POST" enctype="multipart/form-data" action="#documents">
-			{% include "base_forms/form_fields.html" with form=memo_form title="Upload a new document" %}
+			{% include "base_forms/form_fields.html" with form=document_form title="Upload a new document" %}
 			<div class="fieldwrap">
 				<input name="document_form" class="submit" type="submit" value="Upload document"/>
 			</div>
