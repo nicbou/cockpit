@@ -19,7 +19,7 @@ def contact_list(request):
 	
 	if request.POST:
 		contact = Contact()
-		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)
+		contact_form = ContactForm(request.POST,request.FILES,instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(request.POST,prefix='phone',instance=contact)
 		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='email',instance=contact)
 		website_formset = WebsiteFormSet(request.POST,prefix='website',instance=contact)
@@ -33,7 +33,7 @@ def contact_list(request):
 			website_formset.save()
 			return HttpResponseRedirect(reverse('contacts.views.contact_list'))
 	else:
-		contact_form = ContactAddForm()
+		contact_form = ContactForm()
 		phonenumber_formset = PhoneNumberFormSet(prefix='phone')
 		emailaddress_formset = EmailAddressFormSet(prefix='email')
 		website_formset = WebsiteFormSet(prefix='website')
@@ -60,7 +60,7 @@ def contact_single(request,contact_id):
 	WebsiteFormSet = inlineformset_factory(Contact, Website, can_delete=True)    
 	
 	if request.POST:
-		contact_form = ContactAddForm(request.POST,request.FILES,instance=contact)
+		contact_form = ContactForm(request.POST,request.FILES,instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(request.POST,prefix='phone',instance=contact)
 		emailaddress_formset = EmailAddressFormSet(request.POST,prefix='email',instance=contact)
 		website_formset = WebsiteFormSet(request.POST,prefix='website',instance=contact)
@@ -72,7 +72,7 @@ def contact_single(request,contact_id):
 			website_formset.save()
 			return HttpResponseRedirect(reverse('contacts.views.contact_single',args=[contact_id]))
 	else:
-		contact_form = ContactAddForm(instance=contact)
+		contact_form = ContactForm(instance=contact)
 		phonenumber_formset = PhoneNumberFormSet(instance=contact,prefix='phone')
 		emailaddress_formset = EmailAddressFormSet(instance=contact,prefix='email')
 		website_formset = WebsiteFormSet(instance=contact,prefix='website')

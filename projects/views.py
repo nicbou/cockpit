@@ -17,9 +17,9 @@ import operator
 @login_required()
 def index (request):
 	company_id = request.user.get_profile().company_id
-	project_form = ProjectAddForm(prefix="project")
+	project_form = ProjectForm(prefix="project")
 	if request.POST:
-		project_form = ProjectAddForm(request.POST,prefix="project")
+		project_form = ProjectForm(request.POST,prefix="project")
 		if project_form.is_valid():
 			new_project = project_form.save(commit=False)
 			new_project.company_id = company_id
@@ -97,41 +97,41 @@ def project_single (request,project_id):
 			document_form = DocumentAddForm(prefix="document")	
 
 		if 'memo_form' in request.POST:
-			memo_form = MemoAddForm(request.POST, prefix="memo")
+			memo_form = MemoForm(request.POST, prefix="memo")
 			if memo_form.is_valid():
 				new_memo = memo_form.save(commit=False)
 				new_memo.project_id = project_id
 				new_memo.save()
-				memo_form = MemoAddForm(prefix="memo")
+				memo_form = MemoForm(prefix="memo")
 				return HttpResponseRedirect(reverse('projects.views.project_single',args=[project_id]) + "#memos")
 		else:
-			memo_form = MemoAddForm(prefix="memo")
+			memo_form = MemoForm(prefix="memo")
 			
 		if 'task_form' in request.POST:
-			task_form = TaskAddForm(request.POST, prefix="task")
+			task_form = TaskForm(request.POST, prefix="task")
 			if task_form.is_valid():
 				new_task = task_form.save(commit=False)
 				new_task.project_id = project_id
 				new_task.save()
 				return HttpResponseRedirect(reverse('projects.views.project_single',args=[project_id]) + "#tasks")
 		else:
-			task_form = TaskAddForm(prefix="task")
+			task_form = TaskForm(prefix="task")
 			
 		if 'edit_form' in request.POST:
-			edit_form = ProjectAddForm(request.POST,instance=project,prefix="project")
+			edit_form = ProjectForm(request.POST,instance=project,prefix="project")
 			if edit_form.is_valid():
 				edit_project = edit_form.save(commit=False)
 				edit_project.company_id = project.company_id
 				edit_project.save()
 				return HttpResponseRedirect(reverse('projects.views.project_single',args=[project_id]) + "#overview")
 		else:
-			edit_form = ProjectAddForm(instance=project,prefix="project")
+			edit_form = ProjectForm(instance=project,prefix="project")
 
 	else:
 		document_form = DocumentAddForm(prefix="document")
-		memo_form = MemoAddForm(prefix="memo")
-		task_form = TaskAddForm(prefix="task")
-		edit_form = ProjectAddForm(instance=project,prefix="project")
+		memo_form = MemoForm(prefix="memo")
+		task_form = TaskForm(prefix="task")
+		edit_form = ProjectForm(instance=project,prefix="project")
 
 	return render(request,"project_single.html",{
 		'project' : project,
@@ -236,20 +236,20 @@ def memo_edit(request,memo_id): #Returns or processes an AJAX form
 	memo = get_object_or_404(Memo,id=memo_id)
 	if user_can_access_project(request.user,memo.project_id):
 		if not request.POST:
-			memo_form = MemoAddForm(instance=memo,prefix="memo")
+			memo_form = MemoForm(instance=memo,prefix="memo")
 			return render(request,"memo_edit.html",{
 				'memo' : memo,
 				'memo_form' : memo_form
 			})
 		if request.POST:
-			memo_form = MemoAddForm(request.POST,instance=memo,prefix="memo")
+			memo_form = MemoForm(request.POST,instance=memo,prefix="memo")
 			if memo_form.is_valid():
 				edit_memo = memo_form.save(commit=False)
 				edit_memo.project_id = memo.project_id
 				edit_memo.save()
 				return HttpResponseRedirect(reverse('project_single', args=[memo.project_id]) + "#memos")
 		#The code below only runs if the form is not valid, or not yet submitted
-		memo_form = MemoAddForm(instance=memo,prefix="memo")
+		memo_form = MemoForm(instance=memo,prefix="memo")
 		return render(request,"memo_edit.html",{
 			'memo' : memo,
 			'memo_form' : memo_form
