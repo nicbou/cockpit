@@ -16,22 +16,28 @@ $(document).ready(function(){
 		select: function(event, ui) { window.location.hash = ui.tab.hash }
 	});
 	
-	//Hidden passwords
-	$('.reveal').hide();
-	$('.placeholder').click(
-		function(){$(this).hide();$(this).siblings().fadeIn();}
-	);
-	
 	//Task status changes
 	$('.status a').click(function(e){
 		e.preventDefault();
 		$.get($(this).attr('href'));
 		$(this).siblings().removeClass('current');
 		$(this).addClass('current');
+
+		//Change the row's class depending on the new status
+		$(this).parents('tr').removeClass();
+		if($(this).hasClass('completed')){
+			$(this).parents('tr').addClass('status-0');
+		}else if($(this).hasClass('hold')){
+			$(this).parents('tr').addClass('status-1');
+		}else if($(this).hasClass('active')){
+			$(this).parents('tr').addClass('status-2');
+		}else if($(this).hasClass('important')){
+			$(this).parents('tr').addClass('status-3');
+		}
 	});
 	
-	//Comment delete
-	$('.comment-delete,.contact-delete').click(function(e){
+	//AJAX object deletion
+	$('.comment-delete,.contact-delete,.memo-list .delete,.document-list .delete').click(function(e){
 		e.preventDefault();
 		$.ajax({
 			context: this,
