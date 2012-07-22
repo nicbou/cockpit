@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Pontano Sans';
+    src: url('fonts/pontanosans-regular-webfont.eot');
+    src: url('fonts/pontanosans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/pontanosans-regular-webfont.woff') format('woff'),
+         url('fonts/pontanosans-regular-webfont.ttf') format('truetype'),
+         url('fonts/pontanosans-regular-webfont.svg#PontanoSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{margin:0;padding:0;width:100%;height:100%;font:14px/20px 'Pontano Sans',Arial,sans-serif;background:#223 url('background.jpg') no-repeat top center}
+form,table,ul,ol{max-width:840px}/*This fix a jQuery bug in webkit where elements that are 100% width overflow the tab panels*/
+a{text-decoration:none}
+
+#wrapper{width:900px;padding:0 30px 30px;margin:0 auto}
+	#header{color:#fff}
+		#header h1{margin:30px 0 0;font-size:40px;line-height:100%}
+		#contact-thumb{float:left;max-height:65px;margin:0 10px 0 0}
+		#header p{margin:0 0 30px}
+	#top-bar{border-radius:0 0 5px 5px;vertical-align:top;background:#779;height:45px;margin:0;padding:0;box-shadow:0 14px 10px -10px rgba(0, 0, 0, 0.3)}
+		#top-bar a{float:left;display:inline-block}
+		#top-bar a:first-child{border-left:0!important}
+		#top-bar a:last-child{border-right:0!important}
+		#home-icon{background:url('home-icon.png') no-repeat center!important;width:10px;height:45px}
+		#user-menu{float:right;color:#aab}
+		#user-menu a{color:#ccf}
+	.ui-tabs-hide{display:none!important}
+		.ui-tabs-nav{margin:0;padding:0;height:46px}
+			.ui-tabs-nav li{float:left;list-style:none;margin:0;padding:0}
+				.ui-tabs-nav li a,#top-bar a{text-shadow:0 -1px 0 #556;display:inline-block;border-right:1px solid #667;border-left:1px solid #889;padding:0 20px;line-height:45px;color:#fff}
+				.ui-tabs-nav li a{background:#779;border-top:1px solid #889}
+				.ui-tabs-nav .ui-state-active a{text-shadow:none;border:0;border-top:1px solid #fff;color:#000;background:#fff;cursor:text}
+				.ui-tabs-nav li:first-child a{border-radius:5px 0 0 0}
+				.ui-tabs-nav li:last-child a{border-radius:0 5px 0 0}
+	#content,.ui-tabs-panel{background:#fff;padding:30px;border-radius:0 5px 5px 5px}
+		#content{border-radius:5px}
+		h2{margin:0 0 20px}
+		.title-action{float:right}
+		#timeleft{padding:15px 5px}
+			#timeleft p{float:left;margin:0;font-variant:small-caps}
+			.daysleft, .daysoverdue{letter-spacing:-2px;font-size:80px;line-height:60px;display:block}
+			.daysoverdue{color:#b00}
+		#image-preview{box-shadow:0 2px 10px rgba(0,0,0,0.4);max-width:840px}
+		#pdf-preview{width:840px;height:500px}
+		#text-preview{box-shadow:inset 0 0 10px rgba(0,0,0,0.1);max-height:500px;display:block;overflow:auto;border:1px solid #aaa;padding:15px;color:#555}
+		
+		#comments-list{padding:0;margin:0 0 15px}
+			#comments-list li{padding:15px;margin:0;list-style:none}
+				#comments-list li .name{font-weight:bold}
+				#comments-list li .actions{float:right}
+				#comments-list li:nth-child(odd){background:#f6f6f6}
+	table{width:840px;max-width:840px;border-spacing:0;margin:0 0 20px}
+		th,td{padding:5px;text-align:left;vertical-align:top;text-overflow:ellipsis}
+		th{background:#88a;text-transform:uppercase;color:#fff;text-shadow:0 -1px 0 #556;border-bottom:1px solid #668}
+			th:first-child{border-radius:5px 0 0 0}
+			th:last-child{border-radius:0 5px 0 0}
+			th:first-child,td:first-child{padding-left:10px}
+			th:last-child,td:last-child{padding-right:10px}
+			tr:nth-child(even) td{background:#eee}
+			tr:nth-child(odd) td{background:#f6f6f6}
+			td p{margin:0}
+		td{border-top:1px solid #fff;border-bottom:1px solid #ddd}
+			.status,.document-list .actions,.contact-list .actions{max-width:96px;width:96px}
+				.status a,.button{display:inline-block;float:left;width:24px;height:24px;opacity:0.1}
+				.status span{width:5px;display:inline-block}
+					.status a:hover,.current,.button:hover{opacity:1!important}
+					.status a:first-child,.button:first-child{border-top-left-radius:5px;border-bottom-left-radius:5px}
+					.status a:last-child,.button:last-child{border-top-right-radius:5px;border-bottom-right-radius:5px}
+					.status .active{background:url('/static/task-active.png')}
+					.status .important{background:url('/static/task-important.png')}
+					.status .hold{background:url('/static/task-hold.png')}
+					.status .completed{background:url('/static/task-completed.png')}
+				.status-1 td,.status-0 td{color:#999}
+				.status-1 a,.status-0 a{color:#999}
+			.memo-list .actions{max-width:48px;width:48px}
+				.memo-date{color:#999;font-size:80%}
+				.memo-content{padding-left:10px;padding-right:10px}
+					.memo-content ul{margin:0;padding:0}
+					.memo-content li{margin:0 0 0 20px;list-style:outside square;padding:0}
+			.delete,.download,.share,.comments,.edit{opacity:0.5}
+				.edit{background:url('/static/edit.png')}
+				.delete{background:url('/static/delete.png')}
+				.download{background:url('/static/download.png')}
+				.comments{background:url('/static/comment.png');text-align:center;font-size:11px;color:#55a}
+				.share{background:url('/static/share.png')}
+			
+			.contact-list{}
+				.contact-list .actions{max-width:24px;width:24px}
+				.contact-list .name{max-width:200px}
+					.contact-list .title{color:#999;font-size:80%;line-height:120%}
+				.contact-list .type{color:#999;display:inline-block;min-width:65px;margin:0 5px 0 0}
+				
+			.button-big, .submit{padding:10px 15px!important;border:none!important;width:auto!important;height:auto;background:#55a;display:inline-block;color:#fff;cursor:pointer;border-radius:5px}
+			.button-big:hover,.submit:hover{background:#77b}
+				.delete-big{background:#a22}
+				.delete-big:hover{background:#c33}
+		#recent-items{width:410px;float:right;margin:0 0 15px}
+		#important-tasks{width:410px;float:left;margin:0 0 15px}
+			#important-tasks table,#recent-items table{width:100%}
+			#recent-items table{table-layout:fixed}
+			#important-tasks td{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+			#important-tasks td.title{max-width:250px}
+			#important-tasks td.status{width:10px}
+	
+	form{border:1px solid #ddd;background:#eee;padding:30px 30px 15px}
+		textarea,input,select{font:14px/20px 'Pontano Sans',Arial,sans-serif}
+		.help-text{color:#999;font-size:80%}
+			.help-text a{color:#99f}
+			.help-text a:hover{text-decoration:underline}
+		form.edit_form{border:0;background:transparent;padding:0}
+			.edit_form table input,.edit_form textarea,.edit_form select{border:1px solid rgba(0,0,0,0.1);display:block;background:transparent;margin:0;outline:0;line-height:20px;cursor:pointer}
+			.changed{border-color:#55a!important}
+			.edit_form table input,.edit_form textarea{width:500px;height:20px}
+			input,.edit_form table input:focus,textarea,.edit_form textarea:focus,select{padding:4px;border:1px solid #999;background:#fff}
+			.edit_form textarea:focus{height:60px}
+		form h3{margin-top:0}
+		.fieldwrap,.formset{clear:both}
+			.fieldwrap label{}
+			.fieldwrap input,.fieldwrap select,.fieldwrap textarea, .fieldwrap .button-big{float:right;margin:0 0 15px;width:600px}
+			.fieldwrap select{width:610px}
+			.fieldwrap textarea{height:60px}
+				#id_memo-content{height:200px}
+			.fieldwrap .button-big, .fieldwrap .submit{margin-left:10px}
+			.fieldwrap #id_message{height:140px}
+			.fieldwrap.hidden{display:none}
+			#ui-datepicker-div{display:none;background:#fff;padding:15px;box-shadow:2px 5px 15px rgba(0,0,0,0.3)}
+				.ui-datepicker-current-day{background:#88a!important;border-top:1px solid #779}
+				.ui-datepicker-current-day a{color:#fff;text-shadow:0 -1px 0 #556}
+				.ui-datepicker-prev,.ui-datepicker-next{cursor:pointer;padding:5px 10px;border-radius:5px;background:#eee;float:left}
+					.ui-datepicker-next{float:right}
+				.ui-datepicker-title{text-align:center;padding:5px 0;margin:0 0 15px}
+				.ui-datepicker-calendar{table-layout:fixed;width:230px}
+					.ui-datepicker-calendar td{text-align:center}
+		.formset{padding-top:15px;border-top:1px solid #ddd}
+			.formset input[type=text]{width:200px}
+			.formset select{min-width:130px}
+			.formsetfieldwrap{float:right;margin:0 0 15px;width:613px}
+			.inlinefieldwrap{float:left}
+			.inlinefieldwrap label{display:block}
+				.inlinefieldwrap .delete{margin:4px 0 0 5px}
+		.submit{float:right;cursor:pointer}
+		
+	.floatfix{clear:both}

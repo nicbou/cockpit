@@ -1,8 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.db import models
-from Crypto.Cipher import Blowfish
 from django.conf import settings
+from django.utils.safestring import mark_safe
 import binascii
 import hashlib
 import magic
@@ -22,10 +20,6 @@ class Company (models.Model):
 	is_active = models.BooleanField(default=True)
 	def __unicode__(self):
 		return self.name
-	
-class UserProfile (models.Model):
-	user = models.OneToOneField(User)
-	company = models.ForeignKey(Company)
 
 class Project (Descriptible):
 	company = models.ForeignKey(Company)
@@ -50,6 +44,9 @@ class Project (Descriptible):
 		
 	def time_left_percent(self):
 		return int((float((date.today() - self.creation_date).days) / (self.deadline - self.creation_date).days)*100)
+		
+	def __unicode__(self):
+		return self.title
 		
 	class Meta:
 		ordering = ['-status','-deadline']
@@ -84,7 +81,7 @@ class Document (Descriptible):
 		
 	def mimetype(self):
 		m = magic.Magic(mime=True)
-		return m.from_file(self.file.name)
+		return m.from_file(settings.MEDIA_ROOT + self.file.name)
 		
 	def content(self):
 		return self.file.read()
@@ -95,7 +92,7 @@ class Document (Descriptible):
 class Memo (models.Model):
 	project = models.ForeignKey(Project)
 	title = models.CharField(max_length=200)
-	content = models.TextField()
+	content = models.TextField(help_text=mark_safe("Memos support <a target='_blank' href='http://en.wikipedia.org/wiki/Markdown'>Markdown</a>"))
 	creation_date = models.DateTimeField(auto_now_add=True)
 	date_modified = models.DateTimeField(auto_now=True)
 	class Meta:

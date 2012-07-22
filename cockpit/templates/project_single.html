@@ -1,0 +1,93 @@
+{% extends "base_tabs.html" %}
+{% block html_title %}
+	{{ project.title }} | Projects | {{ block.super }}
+{% endblock %}
+{% block title %}{{ project.title }}{% endblock %}
+{% block subtitle %}{{ project.description }}{% endblock %}
+{% block content %}
+	<ul>
+		<li><a href="#overview">Overview</a></li>
+		<li><a href="#tasks">Tasks</a></li>
+		<li><a href="#memos">Memos</a></li>
+		<li><a href="#documents">Documents</a></li>
+	</ul>
+	<div id="overview">
+		<form class="edit_form" method="POST" action="#overview">
+			{% csrf_token %}
+			<table>
+				<thead>
+					<tr>
+						<th id="timeleft" colspan="2">
+							<div class="graph"></div>
+							{% if project.time_left_days >= 0 %}
+								<p><span class="daysleft">{{ project.time_left_days|default:"&#8734;" }}</span> days left</p>
+							{% else %}
+								<p><span class="daysoverdue">{{ project.time_overdue_days|default:"&#8734;" }}</span> days overdue</p>
+							{% endif %}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for field in edit_form %}
+						<tr>
+							<td>{{ field.label_tag }}</td>
+							<td class="field">{{ field }} {{ field.errors }}</td>
+						</tr>
+					{% endfor %}					
+					<tr>
+						<td>Creation date</td>
+						<td>{{ project.creation_date }}</td>
+					</tr>
+					<tr>
+						<td>Incomplete tasks</td>
+						<td>{{ tasks.count }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="fieldwrap">
+				<input name="edit_form" class="submit" type="submit" value="Save changes"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+	
+	
+	<div id="tasks">
+		<a class="title-action" href="{% url projects.views.task_all project.id %}">See all tasks »</a>
+		<h2>Tasks</h2>
+		{% include "task_list.html" %}
+		<form method="POST" action="#tasks">
+			{% include "base_forms/form_fields.html" with form=task_form title="Create a new task" %}
+			<div class="fieldwrap">
+				<input name="task_form" class="submit" type="submit" value="Save task"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+	
+	
+	<div id="memos">
+		<h2>Memos</h2>
+		{% include "memo_list.html" %}
+		<form method="POST" action="#memos">
+			{% include "base_forms/form_fields.html" with form=memo_form title="Write a new memo" %}
+			<div class="fieldwrap">
+				<input name="memo_form" class="submit" type="submit" value="Save memo"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>	
+	</div>
+	
+	
+	<div id="documents">
+		<h2>Documents</h2>
+		{% include "document_list.html" %}
+		<form method="POST" enctype="multipart/form-data" action="#documents">
+			{% include "base_forms/form_fields.html" with form=document_form title="Upload a new document" %}
+			<div class="fieldwrap">
+				<input name="document_form" class="submit" type="submit" value="Upload document"/>
+			</div>
+			<div class="floatfix"></div>
+		</form>	
+	</div>
+{% endblock %}

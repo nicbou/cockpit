@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block html_title %}
+	{{ memo.title }} | Memos | {{ block.super }}	
+{% endblock %}
+{% block title %}Edit {{ memo.title }}{% endblock %}
+{% block subtitle %}Bring changes to an existing memo{% endblock %}
+{% block content %}
+	<form class="memo_form" method="POST" action="#overview">
+		{% include "base_forms/form_fields.html" with form=memo_form %}
+		<div class="fieldwrap">
+			<input name="memo_form" class="submit" type="submit" value="Save changes and return"/>
+		</div>
+		<div class="floatfix"></div>
+	</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base_tabs.html" %}
+{% block html_title %}
+	Profile | {{ block.super }}	
+{% endblock %}
+{% block title %}{{ user.first_name }}'s profile{% endblock %}
+{% block subtitle %}View and edit your user profile{% endblock %}
+{% block content %}
+	<ul>
+		<li><a href="#profile">Profile</a></li>
+		<li><a href="#password">Password change</a></li>
+	</ul>
+	<div id="profile">
+		<form method="POST" action="">
+			{% include "base_forms/form_fields.html" with form=profile_form title="Edit your profile" %}
+			<div class="fieldwrap">
+				<input name="profile_form" class="submit" type="submit" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+	<div id="password">
+		<form method="POST" action="">
+			{% include "base_forms/form_fields.html" with form=password_form title="Change your password" %}
+			<div class="fieldwrap">
+				<input name="password_form" class="submit" type="submit" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
+	</div>
+{% endblock %}
