@@ -3,12 +3,12 @@ from django import forms
 from django.forms import ModelForm
 
 
-class ProjectAddForm(ModelForm):
+class ProjectForm(ModelForm):
 	class Meta:
 		model = Project
 		exclude = ('company',)
 
-class MemoAddForm(ModelForm):
+class MemoForm(ModelForm):
 	class Meta:
 		model = Memo
 		exclude = ('project',)
@@ -36,7 +36,7 @@ class DocumentEmailForm(forms.Form):
 		self.fields['sender'].initial = user.email
 		self.fields['message'].initial = user.get_full_name() + " from " + user.get_profile().company.name + " wants to share the following document with you: " + public_url
 		
-class TaskAddForm(ModelForm):
+class TaskForm(ModelForm):
 	class Meta:
 		model = Task
 		exclude = ('project','status')

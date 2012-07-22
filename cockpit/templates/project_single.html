@@ -53,6 +53,7 @@
 	
 	
 	<div id="tasks">
+		<a class="title-action" href="{% url projects.views.task_all project.id %}">See all tasks »</a>
 		<h2>Tasks</h2>
 		{% include "task_list.html" %}
 		<form method="POST" action="#tasks">
