@@ -197,7 +197,10 @@ def document_delete(request,document_id):
 	if user_can_access_project(request.user,project_id):
 		document.file.delete()
 		document.delete()
-		return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#documents")
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#documents")
 	else:
 		return HttpResponse("You are not allowed to access this",status=403)
 
@@ -253,7 +256,10 @@ def memo_delete(request,memo_id):
 	project_id = memo.project_id
 	if user_can_access_project(request.user,project_id):
 		memo.delete()
-		return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#memos")
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#memos")
 	else:
 		return HttpResponse("You are not allowed to access this",status=403)
 	
@@ -263,7 +269,10 @@ def project_delete(request,project_id):
 	project = get_object_or_404(Project,id=project_id)
 	if user_can_access_project(request.user,project_id):
 		project.delete()
-		return HttpResponseRedirect(reverse('home'))
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('home'))
 	else:
 		return HttpResponse("You are not allowed to access this",status=403)
 
@@ -349,6 +358,9 @@ def comment_delete(request, message_id):
 	if comment.user == request.user or comment.user == None:
 		comment.is_removed = True
 		comment.save()
-		return HttpResponse(status=200)
+		if request.is_ajax():
+			return HttpResponse(status=200)
+		else:
+			return HttpResponseRedirect(reverse('document_single', args=[comment.object_pk]) + '#comments')
 	else:
 		return HttpResponse(status=403)
