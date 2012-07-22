@@ -45,6 +45,9 @@ class Project (Descriptible):
 	def time_left_percent(self):
 		return int((float((date.today() - self.creation_date).days) / (self.deadline - self.creation_date).days)*100)
 		
+	def __unicode__(self):
+		return self.title
+		
 	class Meta:
 		ordering = ['-status','-deadline']
 		

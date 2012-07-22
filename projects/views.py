@@ -17,7 +17,53 @@ import operator
 @login_required()
 def index (request):
 	company_id = request.user.get_profile().company_id
-	project_form = ProjectForm(prefix="project")
+	projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
+	tasks = Task.objects.filter(project__in = projects).exclude(status = 0)[:30]
+	memos = Memo.objects.filter(project__in = projects)[:30]
+	documents = Document.objects.filter(project__in = projects)[:30]
+
+	if request.POST:
+		if 'document_form' in request.POST:
+			document_form = DocumentAddForm(company_id, request.POST, request.FILES, prefix="document")
+			if document_form.is_valid():
+				new_document = document_form.save()
+				return HttpResponseRedirect(reverse('projects.views.index') + '#documents')
+		else:
+			document_form = DocumentAddForm(company_id, prefix="document")
+
+		if 'memo_form' in request.POST:
+			memo_form = MemoAddForm(company_id, request.POST, prefix="memo")
+			if memo_form.is_valid():
+				new_memo = memo_form.save()
+				memo_form = MemoAddForm(company_id, prefix="memo")
+				return HttpResponseRedirect(reverse('projects.views.index') + '#memos')
+		else:
+			memo_form = MemoForm(prefix="memo")
+			
+		if 'task_form' in request.POST:
+			task_form = TaskAddForm(company_id, request.POST, prefix="task")
+			if task_form.is_valid():
+				new_task = task_form.save()
+				return HttpResponseRedirect(reverse('projects.views.index') + '#tasks')
+		else:
+			task_form = TaskAddForm(company_id, prefix="task")
+			
+		if 'project_form' in request.POST:
+			project_form = ProjectForm(request.POST,prefix="project")
+			if project_form.is_valid():
+				edit_project = project_form.save(commit=False)
+				edit_project.company_id = project.company_id
+				edit_project.save()
+				return HttpResponseRedirect(reverse('projects.views.index'))
+		else:
+			project_form = ProjectForm(prefix="project")
+
+	else:
+		document_form = DocumentAddForm(company_id, prefix="document")
+		memo_form = MemoAddForm(company_id, prefix="memo")
+		task_form = TaskAddForm(company_id, prefix="task")
+		project_form = ProjectForm(prefix="project")
+
 	if request.POST:
 		project_form = ProjectForm(request.POST,prefix="project")
 		if project_form.is_valid():
@@ -25,10 +71,6 @@ def index (request):
 			new_project.company_id = company_id
 			new_project.save()
 			return redirect('project_single', new_project.id)
-	projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
-	tasks = Task.objects.filter(project__in = projects).exclude(status = 0)[:30]
-	memos = Memo.objects.filter(project__in = projects)[:30]
-	documents = Document.objects.filter(project__in = projects)[:30]
 	
 	recent = sorted(chain(tasks,documents), key=operator.attrgetter('creation_date'), reverse=True)[:10]
 	return render(request,"index.html",{
@@ -37,6 +79,9 @@ def index (request):
 		'memos' : memos,
 		'documents' : documents,
 		'project_form' : project_form,
+		'memo_form' : memo_form,
+		'task_form' : task_form,
+		'document_form' : document_form,
 	})
 
 	
@@ -87,14 +132,14 @@ def project_single (request,project_id):
 
 	if request.POST:
 		if 'document_form' in request.POST:
-			document_form = DocumentAddForm(request.POST, request.FILES, prefix="document")
+			document_form = DocumentForm(request.POST, request.FILES, prefix="document")
 			if document_form.is_valid():
 				new_document = document_form.save(commit=False)
 				new_document.project_id = project_id
 				new_document.save()
 				return HttpResponseRedirect(reverse('projects.views.project_single',args=[project_id]) + "#documents")
 		else:
-			document_form = DocumentAddForm(prefix="document")	
+			document_form = DocumentForm(prefix="document")	
 
 		if 'memo_form' in request.POST:
 			memo_form = MemoForm(request.POST, prefix="memo")
@@ -128,7 +173,7 @@ def project_single (request,project_id):
 			edit_form = ProjectForm(instance=project,prefix="project")
 
 	else:
-		document_form = DocumentAddForm(prefix="document")
+		document_form = DocumentForm(prefix="document")
 		memo_form = MemoForm(prefix="memo")
 		task_form = TaskForm(prefix="task")
 		edit_form = ProjectForm(instance=project,prefix="project")
