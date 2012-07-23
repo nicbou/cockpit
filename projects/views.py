@@ -52,7 +52,7 @@ def index (request):
 			project_form = ProjectForm(request.POST,prefix="project")
 			if project_form.is_valid():
 				edit_project = project_form.save(commit=False)
-				edit_project.company_id = project.company_id
+				edit_project.company_id = company_id
 				edit_project.save()
 				return HttpResponseRedirect(reverse('projects.views.index'))
 		else:
