@@ -1,6 +1,6 @@
 {% extends "base_tabs.html" %}
-{% block breadcrumbs %}
-	Account » User profile
+{% block html_title %}
+	Profile | {{ block.super }}	
 {% endblock %}
 {% block title %}{{ user.first_name }}'s profile{% endblock %}
 {% block subtitle %}View and edit your user profile{% endblock %}
@@ -11,30 +11,16 @@
 	</ul>
 	<div id="profile">
 		<form method="POST" action="">
-			<h3>Edit your profile</h3>
-			{% csrf_token %}
-			{% for field in profile_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=profile_form title="Edit your profile" %}
 			<div class="fieldwrap">
-				<input name="project_form" class="submit" type="submit" />
+				<input name="profile_form" class="submit" type="submit" />
 			</div>
 			<div class="floatfix"></div>
 		</form>
 	</div>
 	<div id="password">
 		<form method="POST" action="">
-			<h3>Change your password</h3>
-			{% csrf_token %}
-			{% for field in password_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=password_form title="Change your password" %}
 			<div class="fieldwrap">
 				<input name="password_form" class="submit" type="submit" />
 			</div>

@@ -1,0 +1,13 @@
+{% if title %}<h3>{{ title }}</h3>{% endif %}
+{% csrf_token %}
+{% for field in form.visible_fields %}
+	<div class="fieldwrap">
+		{{ field.errors }}
+		{{ field }}
+		{{ field.label_tag }}<br/>
+		{% if field.help_text %}<span class="help-text">{{ field.help_text }}</span>{% endif %}
+	</div>
+{% endfor %}
+{% for field in form.hidden_fields %}
+	{{ field }}
+{% endfor %}

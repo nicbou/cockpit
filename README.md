@@ -22,3 +22,5 @@ http://home.nicolasbouliane.com:82/
 
 Username: test
 Password: test
+
+![Screenshot](http://i.imgur.com/PniFY.png)

@@ -1,21 +1,29 @@
-<table>
+<table class="memo-list">
 	{% load markup %}
 	<thead>
 		<tr>
 			<th>Title</th>
 			<th>Message</th>
-			<th>Actions</th>
+			{% if show_project %}
+				<th>Project</th>
+			{% endif %}	
+			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for memo in memos %}
 			<tr>
-				<td>
+				<td class="title">
 					{{ memo.title }}<br/>
-					<span class="memo-date">{{ memo.date_modified.date }}</span>
+					<span class="memo-date">{{ memo.date_modified.date|date|default:"None" }}</span>
 				</td>
 				<td class="memo-content">{{ memo.content|markdown:"nl2br" }}</td>
-				<td>
+				{% if show_project %}
+					<td>
+						<a href="{% url project_single memo.project_id %}">{{ memo.project.title }}</a>
+					</td>
+				{% endif %}
+				<td class="actions">
 					<a class="button edit" href="{% url projects.views.memo_edit memo.id %}">&nbsp;</a>
 					<a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a>
 				</td>

@@ -13,14 +13,7 @@
 		<h2 class="floatfix">Projects</h2>
 		{% include "project_list.html" %}
 		<form method="POST" enctype="multipart/form-data" action="">
-			<h3>Start a new project</h3>
-			{% csrf_token %}
-			{% for field in project_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=project_form title="Start a new project" %}
 			<div class="fieldwrap">
 				<input name="project_form" class="submit" type="submit" />
 			</div>
@@ -28,16 +21,37 @@
 		</form>
 	</div>
 	<div id="tasks">
-		<a class="title-action" href="{% url projects.views.task_all %}">See all tasks</a>
+		<a class="title-action" href="{% url projects.views.task_all %}">See all tasks »</a>
 		<h2>Most important tasks</h2>
-		{% include "task_list.html" %}
+		{% include "task_list.html" with show_project="show" %}
+		<form method="POST" action="">
+			{% include "base_forms/form_fields.html" with form=task_form title="Create a new task" %}
+			<div class="fieldwrap">
+				<input name="task_form" class="submit" type="submit" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
 	</div>
 	<div id="memos">
 		<h2>Latest memos</h2>
-		{% include "memo_list.html" %}
+		{% include "memo_list.html" with show_project="show" %}
+		<form method="POST" action="">
+			{% include "base_forms/form_fields.html" with form=memo_form title="Write a new memo" %}
+			<div class="fieldwrap">
+				<input name="memo_form" class="submit" type="submit" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
 	</div>
 	<div id="documents">
 		<h2>Latest documents</h2>
-		{% include "document_list.html" %}
+		{% include "document_list.html" with show_project="show" %}
+		<form method="POST" enctype="multipart/form-data" action="">
+			{% include "base_forms/form_fields.html" with form=document_form title="Upload a new document" %}
+			<div class="fieldwrap">
+				<input name="document_form" class="submit" type="submit" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
 	</div>
 {% endblock %}

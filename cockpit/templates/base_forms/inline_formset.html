@@ -1,0 +1,26 @@
+<div class="formset">
+	<label for="">{{ label }}</label>
+	{{ formset.management_form }}
+	{% for form in formset.forms %}
+		<div class="formsetfieldwrap phonenumber">
+			{% for field in form.visible_fields %}
+				{% if not field.name = form.DELETE.name %}
+					<div class="inlinefieldwrap">
+						{{ field.errors }}
+						{{ field }}
+					</div>
+				{% endif %}
+			{% endfor %}
+			{% if not form.instance.id = None and formset.can_delete %}
+				<div class="inlinefieldwrap">
+					{% load url from future %}
+					<a class="button delete" href="{% url delete_view form.instance.id %}"></a>
+				</div>
+			{% endif %}
+			{% for field in form.hidden_fields %}
+				{{ field }}
+			{% endfor %}
+			<input type="hidden" name="{{form.DELETE.html_name}}" id="{{form.DELETE.auto_id}}"/>
+		</div>
+	{% endfor %}
+</div>

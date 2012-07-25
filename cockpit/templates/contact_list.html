@@ -1,0 +1,33 @@
+<table class="contact-list">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Phone</th>
+			<th>Email</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for contact in contacts %}
+			<tr>
+				<td class="name">
+					<a href="{% url contacts.views.contact_single contact.id %}">{{ contact.get_full_name }}</a><br/>
+					<div class="title">{{ contact.title }}</div>
+				</td>
+				<td>
+					{% for phone in contact.phonenumbers %}
+						<p><span class="type">{{ phone.get_type_display }}</span>{{ phone.number }}</p>
+					{% endfor %}
+				</td>
+				<td>
+					{% for email in contact.emailaddresses %}
+						<p><span class="type">{{ email.get_type_display }}</span>{{ email.email }}</p>
+					{% endfor %}
+				</td>
+				<td class="actions">
+					<a title="Delete this contact" class="contact-delete button delete" href="{% url contact_delete contact.id %}">&nbsp;</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

@@ -25,10 +25,13 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'America/Montreal'
+DATE_INPUT_FORMATS = ('%y-%m-%d',)
+DATE_OUTPUT_FORMAT = '%y-%m-%d'
+DATE_FORMAT = 'N j' 
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'fr-ca'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
@@ -46,18 +49,18 @@ USE_TZ = True
 SITE_ROOT = os.path.dirname(__file__)
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = SITE_ROOT + '/../files/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/files/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static'
+STATIC_ROOT = SITE_ROOT + '/../static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -118,11 +121,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'django.contrib.markup',
     'django.contrib.comments',
     'projects',
     'accounts',
+    'contacts',
 )
 
 # A sample logging configuration. The only tangible logging

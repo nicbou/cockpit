@@ -1,11 +1,10 @@
 {% extends "base_tabs.html" %}
 {% load comments %}
-
-{% block breadcrumbs %}
+{% block html_title %}
 	{% if is_public %}
-		{{ document.project.company.name }} » {{ document.project.title }} » Public documents » {{ document.title }}
+		{{ document.title }} | {{ block.super }}
 	{% else %}
-		<a href="{% url projects.views.index %}">Projects</a> » <a href="/projects/{{ document.project_id }}">{{ document.project.title }}</a> » <a href="/projects/{{ document.project_id }}#documents">Documents</a> » {{ document.title }}		
+		{{ document.title }} | Documents | {{ block.super }}
 	{% endif %}
 {% endblock %}
 {% block account %}{% if not user.is_anonymous %}{{ block.super }}{% else %}{% endif %}{% endblock %}
@@ -121,10 +120,12 @@
 							</div>
 						{% endif %}
 					{% else %}
-						<div class="fieldwrap {% if field.name == "honeypot" %}hidden{% endif %}">
-							{{ field.errors }}
-							{{ field.label_tag }}{{ field }}
-						</div>
+						{% if field.name != "url" %}
+							<div class="fieldwrap {% if field.name == "honeypot" %}hidden{% endif %}">
+								{{ field.errors }}
+								{{ field.label_tag }}{{ field }}
+							</div>
+						{% endif %}
 					{% endif %}
 				{% endfor %}
 				<div class="fieldwrap">
@@ -137,14 +138,7 @@
 	{% if not is_public %}
 	<div id="share">
 		<form method="POST" action="{% url document_single document.id %}#share">
-			<h3>Email this document</h3>
-			{% csrf_token %}
-			{% for field in email_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=email_form title="Email this document" %}
 			<div class="fieldwrap">
 				<input name="email_form" class="submit" type="submit" value="Email this document"/>
 			</div>

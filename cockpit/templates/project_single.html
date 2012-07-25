@@ -1,5 +1,7 @@
 {% extends "base_tabs.html" %}
-{% block breadcrumbs %}<a href="{% url projects.views.index %}">Projects</a> » {{ project.title }}{% endblock %}
+{% block html_title %}
+	{{ project.title }} | Projects | {{ block.super }}
+{% endblock %}
 {% block title %}{{ project.title }}{% endblock %}
 {% block subtitle %}{{ project.description }}{% endblock %}
 {% block content %}
@@ -51,17 +53,11 @@
 	
 	
 	<div id="tasks">
+		<a class="title-action" href="{% url projects.views.task_all project.id %}">See all tasks »</a>
 		<h2>Tasks</h2>
 		{% include "task_list.html" %}
 		<form method="POST" action="#tasks">
-			<h3>Create a new task</h3>
-			{% csrf_token %}
-			{% for field in task_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=task_form title="Create a new task" %}
 			<div class="fieldwrap">
 				<input name="task_form" class="submit" type="submit" value="Save task"/>
 			</div>
@@ -74,16 +70,7 @@
 		<h2>Memos</h2>
 		{% include "memo_list.html" %}
 		<form method="POST" action="#memos">
-			<h3>Write a memo</h3>
-			{% csrf_token %}
-			{% for field in memo_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field }}
-					{{ field.label_tag }}<br/>
-					{% if field.help_text %}<span class="help-text">{{ field.help_text }}</span>{% endif %}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=memo_form title="Write a new memo" %}
 			<div class="fieldwrap">
 				<input name="memo_form" class="submit" type="submit" value="Save memo"/>
 			</div>
@@ -96,14 +83,7 @@
 		<h2>Documents</h2>
 		{% include "document_list.html" %}
 		<form method="POST" enctype="multipart/form-data" action="#documents">
-			<h3>Upload a new document</h3>
-			{% csrf_token %}
-			{% for field in document_form %}
-				<div class="fieldwrap">
-					{{ field.errors }}
-					{{ field.label_tag }}{{ field }}
-				</div>
-			{% endfor %}
+			{% include "base_forms/form_fields.html" with form=document_form title="Upload a new document" %}
 			<div class="fieldwrap">
 				<input name="document_form" class="submit" type="submit" value="Upload document"/>
 			</div>

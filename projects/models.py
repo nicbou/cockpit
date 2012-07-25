@@ -45,6 +45,9 @@ class Project (Descriptible):
 	def time_left_percent(self):
 		return int((float((date.today() - self.creation_date).days) / (self.deadline - self.creation_date).days)*100)
 		
+	def __unicode__(self):
+		return self.title
+		
 	class Meta:
 		ordering = ['-status','-deadline']
 		
@@ -78,7 +81,7 @@ class Document (Descriptible):
 		
 	def mimetype(self):
 		m = magic.Magic(mime=True)
-		return m.from_file(self.file.name)
+		return m.from_file(settings.MEDIA_ROOT + self.file.name)
 		
 	def content(self):
 		return self.file.read()
