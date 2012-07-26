@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block html_title %}
-	Account activation | {{ block.super }}	
+	{% if activated %}Account activated{% else %}Account activation error{% endif %} | {{ block.super }}	
 {% endblock %}
-{% block title %}Account activation{% endblock %}
+{% block title %}{% if activated %}Account activated{% else %}Account activation error{% endif %}{% endblock %}
 {% block content %}
 	{% if activated %}
 		<form id="login_small" method="post" action="{% url django.contrib.auth.views.login %}">
@@ -14,7 +14,7 @@
 			<div class="floatfix"></div>
 		</form>
 		<h3>Your account is now activated</h3>
-		<p><a href="{% url django.contrib.auth.views.login %}">Login</a> to access your projects.</p>
+		<p><a href="{% url django.contrib.auth.views.login %}">Login</a> to get started with your projects.</p>
 		<div class="floatfix"></div>
 	{% else %}
 		<h3>Wrong activation code</h3>
