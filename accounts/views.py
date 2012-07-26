@@ -66,11 +66,12 @@ def activate_account(request,user_id,key):
 	profile = user.get_profile()
 
 	activated = False
+	login_form = LoginForm()
+	
 	if profile.get_activation_key() == key:
 		profile.user.is_active = True
 		profile.user.save()
 		activated = True
-		login_form = LoginForm()
 
 	return render(request,"user_signup_complete.html",{
 		'activated':activated,
