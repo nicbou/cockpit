@@ -44,6 +44,7 @@
 		</form>
 	</div>
 	<div id="documents">
+		<a class="title-action" href="{% url projects.views.document_all %}">See all documents »</a>
 		<h2>Latest documents</h2>
 		{% include "document_list.html" with show_project="show" %}
 		<form method="POST" enctype="multipart/form-data" action="">

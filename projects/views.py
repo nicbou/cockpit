@@ -249,6 +249,20 @@ def document_single(request,document_id,key=""):
 	else:
 		return HttpResponse("You are not allowed to access this",status=403)
 	
+@login_required()
+def document_all(request,project_id=None):
+	company_id = request.user.get_profile().company_id
+	if not project_id == None:
+		documents = Document.objects.filter(project = project_id)
+		project = get_object_or_404(Project,id=project_id)
+	else:
+		projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
+		documents = Document.objects.filter(project__in = projects)
+		project = None
+	return render(request,"document_all.html",{
+		'documents' : documents,
+		'project' : project
+	})
 
 @login_required()	
 def memo_delete(request,memo_id):
