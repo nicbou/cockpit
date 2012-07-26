@@ -15,8 +15,8 @@ class UserProfileForm(ModelForm):
 		fields=('first_name', 'last_name', 'email')
 		
 class PasswordChangeForm(forms.Form):
-	password1 = forms.CharField(label='New password',max_length=20, widget=forms.PasswordInput())
-	password2 = forms.CharField(label='Repeat password',max_length=20, widget=forms.PasswordInput())
+	password1 = forms.CharField(label='New password',max_length=128, widget=forms.PasswordInput())
+	password2 = forms.CharField(label='Repeat password',max_length=128, widget=forms.PasswordInput())
 	
 	def clean_password2(self):
 		if self.cleaned_data.get('password1') and self.cleaned_data.get('password2') and self.cleaned_data['password1'] != self.cleaned_data['password2']:
@@ -38,8 +38,8 @@ class SignUpForm(forms.Form):
 
 	email = forms.EmailField(label='E-mail address', required=True)
 
-	password1 = forms.CharField(label='Password', help_text='Use a long, unique password',max_length=20, widget=forms.PasswordInput())
-	password2 = forms.CharField(label='Repeat password', required=True, max_length=20, widget=forms.PasswordInput())
+	password1 = forms.CharField(label='Password', help_text='Use a long, unique password',max_length=128, widget=forms.PasswordInput())
+	password2 = forms.CharField(label='Repeat password', required=True, max_length=128, widget=forms.PasswordInput())
 	
 	def clean_username(self):
 		#Make sure the username is unique
