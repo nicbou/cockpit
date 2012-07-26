@@ -28,6 +28,10 @@
 					<a class="button delete" href="{% url projects.views.memo_delete memo.id %}#memos">&nbsp;</a>
 				</td>
 			</tr>
+		{% empty %}
+			<tr>
+				<td class="empty-table" colspan="{% if show_project %}4{% else %}3{% endif %}">There are no memos yet. To create new memos, use the form below.</td>
+			</tr>
 		{% endfor %}
 	</tbody>
 </table>

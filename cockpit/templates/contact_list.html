@@ -28,6 +28,10 @@
 					<a title="Delete this contact" class="contact-delete button delete" href="{% url contact_delete contact.id %}">&nbsp;</a>
 				</td>
 			</tr>
+		{% empty %}
+			<tr>
+				<td class="empty-table" colspan="4">There are no contacts yet. To create new contacts, use the form below.</td>
+			</tr>
 		{% endfor %}
 	</tbody>
 </table>

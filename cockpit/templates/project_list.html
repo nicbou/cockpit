@@ -20,6 +20,10 @@
 					<a class="completed {% if project.status = project.COMPLETED %} current{% endif %}" href="{% url projects.views.project_status project.id project.COMPLETED %}">&nbsp;</a>
 				</td>
 			</tr>
+		{% empty %}
+			<tr>
+				<td class="empty-table" colspan="4">There are no projects yet. To create new projects, use the form below.</td>
+			</tr>
 		{% endfor %}
 	</tbody>
 </table>
