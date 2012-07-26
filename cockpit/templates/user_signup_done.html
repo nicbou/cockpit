@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block html_title %}
+	Sign up | {{ block.super }}	
+{% endblock %}
+{% block title %}Create a new account{% endblock %}
+{% block subtitle %}Start getting things done with Cockpit{% endblock %}
+{% block content %}
+	<h3>Thank you!</h3>
+	<p>An activation link was sent to you. Please check your email for instructions.</p>
+	<p>
+		<a href="{% url home %}">« Go to the login page</a>
+	</p>
+{% endblock %}
