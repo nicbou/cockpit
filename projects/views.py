@@ -276,6 +276,21 @@ def memo_delete(request,memo_id):
 			return HttpResponseRedirect(reverse('project_single', args=[project_id]) + "#memos")
 	else:
 		return HttpResponse("You are not allowed to access this",status=403)
+
+@login_required()
+def memo_all(request,project_id=None):
+	company_id = request.user.get_profile().company_id
+	if not project_id == None:
+		memos = Memo.objects.filter(project = project_id)
+		project = get_object_or_404(Project,id=project_id)
+	else:
+		projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
+		memos = Memo.objects.filter(project__in = projects)
+		project = None
+	return render(request,"memo_all.html",{
+		'memos' : memos,
+		'project' : project
+	})
 	
 	
 @login_required()

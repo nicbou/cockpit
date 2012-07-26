@@ -33,6 +33,7 @@
 		</form>
 	</div>
 	<div id="memos">
+		<a class="title-action" href="{% url projects.views.memo_all %}">See all memos »</a>
 		<h2>Latest memos</h2>
 		{% include "memo_list.html" with show_project="show" %}
 		<form method="POST" action="">
