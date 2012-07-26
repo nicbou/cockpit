@@ -108,6 +108,9 @@ a{text-decoration:none}
 		.help-text{color:#999;font-size:80%}
 			.help-text a{color:#99f}
 			.help-text a:hover{text-decoration:underline}
+		form#login_small{float:right}
+			form#login_small_left{float:left;margin-right:30px}
+			#login_small input,#login_small_left input{width:300px}
 		form.edit_form{border:0;background:transparent;padding:0}
 			.edit_form table input,.edit_form textarea,.edit_form select{border:1px solid rgba(0,0,0,0.1);display:block;background:transparent;margin:0;outline:0;line-height:20px;cursor:pointer}
 			.changed{border-color:#55a!important}
@@ -117,7 +120,7 @@ a{text-decoration:none}
 		form h3{margin-top:0}
 		.fieldwrap,.formset{clear:both}
 			.fieldwrap label{}
-			.fieldwrap input,.fieldwrap select,.fieldwrap textarea, .fieldwrap .button-big{float:right;margin:0 0 15px;width:600px}
+			.fieldwrap input,.fieldwrap select,.fieldwrap textarea, .fieldwrap .button-big{float:right;margin:0 0 15px 15px;width:600px}
 			.fieldwrap select{width:610px}
 			.fieldwrap textarea{height:60px}
 				#id_memo-content{height:200px}

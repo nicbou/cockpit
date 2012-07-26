@@ -42,6 +42,9 @@ urlpatterns = patterns('',
 	(r'^login/reset/done/$', 'django.contrib.auth.views.password_reset_done',{'template_name': 'profile/password_reset_done.html'}),
 	(r'^login/reset/complete/$', 'django.contrib.auth.views.password_reset_complete',{'template_name': 'profile/password_reset_complete.html'}),
 	(r'^logout/$', 'projects.views.user_logout'),
+	url(r'^signup/$', 'accounts.views.signup', name='signup'),
+	url(r'^signup/thankyou$', 'accounts.views.signup_thankyou', name='signup_thankyou'),
+	url(r'^signup/(\d+)/(.*)$', 'accounts.views.activate_account', name='activate_account'),
 	
 	#Static files and documents
 	(r'^documents/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT + 'documents'}),

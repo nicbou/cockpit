@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block html_title %}
+	Sign up | {{ block.super }}	
+{% endblock %}
+{% block title %}Create a new account{% endblock %}
+{% block subtitle %}Start getting things done with Cockpit{% endblock %}
+{% block content %}
+	<form method="POST" action="">
+		{% include "base_forms/form_fields.html" with form=signup_form %}
+		<div class="fieldwrap">
+			<input name="signup_form" class="submit" type="submit" value="Create account"/>
+		</div>
+		<div class="floatfix"></div>
+	</form>
+{% endblock %}

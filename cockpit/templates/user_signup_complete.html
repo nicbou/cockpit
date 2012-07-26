@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block html_title %}
+	{% if activated %}Account activated{% else %}Account activation error{% endif %} | {{ block.super }}	
+{% endblock %}
+{% block title %}{% if activated %}Account activated{% else %}Account activation error{% endif %}{% endblock %}
+{% block content %}
+	{% if activated %}
+		<form id="login_small" method="post" action="{% url django.contrib.auth.views.login %}">
+			{% include "base_forms/form_fields.html" with form=login_form title="Login" %}
+			<div class="fieldwrap">
+				<input class="submit" type="submit" value="Sign in" />
+				<input type="hidden" name="next" value="{{ next }}" />
+			</div>
+			<div class="floatfix"></div>
+		</form>
+		<h3>Your account is now activated</h3>
+		<p><a href="{% url django.contrib.auth.views.login %}">Login</a> to get started with your projects.</p>
+		<div class="floatfix"></div>
+	{% else %}
+		<h3>Wrong activation code</h3>
+		<p>The activation code you have provided is invalid.</p>
+	{% endif %}
+{% endblock %}
