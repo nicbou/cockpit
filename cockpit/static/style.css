@@ -109,7 +109,8 @@ a{text-decoration:none}
 			.help-text a{color:#99f}
 			.help-text a:hover{text-decoration:underline}
 		form#login_small{float:right}
-			#login_small input{width:300px}
+			form#login_small_left{float:left;margin-right:30px}
+			#login_small input,#login_small_left input{width:300px}
 		form.edit_form{border:0;background:transparent;padding:0}
 			.edit_form table input,.edit_form textarea,.edit_form select{border:1px solid rgba(0,0,0,0.1);display:block;background:transparent;margin:0;outline:0;line-height:20px;cursor:pointer}
 			.changed{border-color:#55a!important}

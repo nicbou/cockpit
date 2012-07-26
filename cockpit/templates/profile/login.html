@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% block html_title %}
+	Sign in | {{ block.super }}	
+{% endblock %}
 {% block title %}Sign in{% endblock %}
-{% block subtitle %}Login to access your projects{% endblock %}
 {% block content %}
-	<form method="post" action="/login/">
+	<form id="login_small_left" method="post" action="{% url django.contrib.auth.views.login %}">
+		<h3>Sign in</h3>
 		{% csrf_token %}
 		{% if form.errors %}
 			<p>Your username and password didn't match. Please try again.</p>
@@ -19,5 +22,10 @@
 		</div>
 		<div class="floatfix"></div>
 	</form>
-	<a href="/login/reset">Forgot your password?</a>
+	<h3>Don't have an account?</h3>
+	<p><a href="{% url accounts.views.signup %}">Sign up</a> and start getting things done with Cockpit.</p>
+	<h3>Forgot your password?</h3>
+	<p><a href="{% url django.contrib.auth.views.password_reset %}">Reset your password</a> by email.</p>
+	
+	<div class="floatfix"></div>
 {% endblock %}
