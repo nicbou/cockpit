@@ -9,7 +9,7 @@ from datetime import date
 
 class Descriptible (models.Model):
 	title = models.CharField(max_length=200)
-	description = models.TextField(blank=True)
+	description = models.TextField(blank=True,help_text=mark_safe("This field supports <a target='_blank' href='http://en.wikipedia.org/wiki/Markdown'>Markdown</a>"))
 	creation_date = models.DateField(auto_now_add=True)
 	class Meta:
 		abstract = True
@@ -92,7 +92,7 @@ class Document (Descriptible):
 class Memo (models.Model):
 	project = models.ForeignKey(Project)
 	title = models.CharField(max_length=200)
-	content = models.TextField(help_text=mark_safe("Memos support <a target='_blank' href='http://en.wikipedia.org/wiki/Markdown'>Markdown</a>"))
+	content = models.TextField(help_text=mark_safe("This field supports <a target='_blank' href='http://en.wikipedia.org/wiki/Markdown'>Markdown</a>"))
 	creation_date = models.DateTimeField(auto_now_add=True)
 	date_modified = models.DateTimeField(auto_now=True)
 	class Meta:
