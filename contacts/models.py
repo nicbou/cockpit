@@ -46,6 +46,9 @@ class Contact(models.Model):
 		else:
 			return None
 
+	class Meta:
+		ordering = ['first_name','last_name','title']
+
 
 #Phone number for a contact		
 class PhoneNumber(models.Model):

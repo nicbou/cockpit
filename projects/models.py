@@ -49,7 +49,7 @@ class Project (Descriptible):
 		return self.title
 		
 	class Meta:
-		ordering = ['-status','-deadline']
+		ordering = ['-status','title']
 		
 class Document (Descriptible):
 	project = models.ForeignKey(Project)
@@ -87,7 +87,7 @@ class Document (Descriptible):
 		return self.file.read()
 		
 	class Meta:
-		ordering = ['-creation_date']
+		ordering = ['-creation_date','project']
 	
 class Memo (models.Model):
 	project = models.ForeignKey(Project)
@@ -96,7 +96,7 @@ class Memo (models.Model):
 	creation_date = models.DateTimeField(auto_now_add=True)
 	date_modified = models.DateTimeField(auto_now=True)
 	class Meta:
-		ordering = ['-date_modified']
+		ordering = ['-date_modified','-creation_date','project']
 	
 class Task (Descriptible):
 	project = models.ForeignKey(Project)
@@ -124,4 +124,4 @@ class Task (Descriptible):
 
 
 	class Meta:
-		ordering = ['-status','-deadline']
+		ordering = ['-status','-deadline','project','-creation_date']
