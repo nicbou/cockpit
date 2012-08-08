@@ -8,7 +8,7 @@ class ModelAddForm(ModelForm):
 	def __init__(self, company_id, *args, **kwargs):
 		super(ModelAddForm, self).__init__(*args, **kwargs)
 		#Only propose active projects that belong to this user
-		self.fields['project'].queryset = Project.objects.filter(company_id=company_id).exclude(status=0)
+		self.fields['project'].queryset = Project.objects.filter(company_id=company_id).exclude(status=0).extra(order_by=['title'])
 
 #Add/edit a project
 class ProjectForm(ModelForm):
