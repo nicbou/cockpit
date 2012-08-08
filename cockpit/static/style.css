@@ -106,7 +106,7 @@ a{text-decoration:none}
 	
 	form{border:1px solid #ddd;background:#eee;padding:30px 30px 15px}
 		textarea,input,select{font:14px/20px 'Pontano Sans',Arial,sans-serif}
-		.help-text{color:#999;font-size:80%}
+		.help-text{color:#999;font-size:80%;float:left;line-height:90%}
 			.help-text a{color:#99f}
 			.help-text a:hover{text-decoration:underline}
 		form#login_small{float:right}
