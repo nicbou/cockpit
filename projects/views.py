@@ -18,7 +18,7 @@ import operator
 def index (request):
 	company_id = request.user.get_profile().company_id
 	projects = Project.objects.filter(company_id = company_id).exclude(status = 0)
-	tasks = Task.objects.filter(project__in = projects).exclude(status = 0)[:30]
+	tasks = Task.objects.filter(project__in = projects).exclude(status = 0).exclude(project__status = 1)[:30]
 	memos = Memo.objects.filter(project__in = projects)[:30]
 	documents = Document.objects.filter(project__in = projects)[:30]
 
