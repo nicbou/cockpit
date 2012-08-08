@@ -1,4 +1,5 @@
 <table class="project-list">
+	{% load markup %}
 	<thead>
 		<tr>
 			<th>Project</th>
@@ -11,7 +12,7 @@
 		{% for project in projects %}
 			<tr class="status-{{ project.status }}">
 				<td class="title"><a href="{% url projects.views.project_single project.id %}">{{ project.title }}</a></td>
-				<td>{{ project.description|linebreaksbr }}</td>
+				<td>{{ project.description|markdown:"nl2br" }}</td>
 				<td title="{{ project.time_left_days }} days left">{{ project.deadline|date|default:"None" }}</td>
 				<td class="status">
 					<a class="active {% if project.status = project.ACTIVE %} current{% endif %}" href="{% url projects.views.project_status project.id project.ACTIVE %}">&nbsp;</a>

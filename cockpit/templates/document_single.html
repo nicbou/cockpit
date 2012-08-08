@@ -9,7 +9,7 @@
 {% endblock %}
 {% block account %}{% if not user.is_anonymous %}{{ block.super }}{% else %}{% endif %}{% endblock %}
 {% block title %}{{ document.title }}{% endblock %}
-{% block subtitle %}{{ document.description }}{% endblock %}
+{% block subtitle %}{% endblock %}
 {% block content %}
 	<ul>
 		<li><a href="#file">File information</a></li>
@@ -61,7 +61,7 @@
 			<table>
 				<tr>
 					<td>Description</td>
-					<td>{{ document.description|default:"<i>No description</i>" }}</td>
+					<td>{% load markup %}{{ document.description|markdown:"nl2br"|default:"<i>No description</i>" }}</td>
 				</tr>
 				<tr>
 					<td>File name</td>
